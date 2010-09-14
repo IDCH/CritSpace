@@ -1,0 +1,36 @@
+-- This is a sample configuration file for the VisualProperties system. 
+-- By default, when instantiating a new PropertyRepository, the system will 
+-- look for the 'vprops' property file on the current path. This file may be 
+-- copied to 'vprops.properties' and edited appropriately for to reflect the 
+-- local environment. 
+--
+-- More commonly, however, the properties defined by this file will be 
+-- incorporated into a larger system that uses the VisualProperties module. 
+-- This larger system will supply its own properties file (with appropriate 
+-- instructions for editing that file) to be used for instantiating the 
+-- PropertyRepository.
+
+-- ===========================================================================
+-- Config properties for the VisualProperties library.
+-- ===========================================================================
+
+-- The path to the SQL source code needed to create the database. The default 
+-- value corresponds to the location of these documents relative to the the 
+-- VProps distributions. You should change this property only if your 
+-- application needs to move this from the default directory or if you need to
+-- provide an absolute path for some reason. 
+org.idch.vprops.sqldir=src/sql/vprops
+
+-- The fully qualified name of the class that implements the IPropertyRepository
+-- interface. This class is used as the Facade to the persistence layer.
+-- By default, this uses the IDCH implemenation backed by a MySQL database. 
+org.idch.vprops.repository=org.idch.vprops.persist.mysql.MySQLPropertyRepository
+
+-- Most PropertyRepository implementations will require access to a database.
+-- These propertiers will be common to most implementations, although other 
+-- repositories may need additional information. If you are using a different
+-- repository, please consult its configurationg instructions. 
+org.idch.vprops.db.url=jdbc:mysql://example.com/vprops?useUnicode=true&amp;characterEncoding=UTF-8
+org.idch.vprops.db.driver=com.mysql.jdbc.Driver
+org.idch.vprops.db.user=dbusername
+org.idch.vprops.db.pass=dbpassword
