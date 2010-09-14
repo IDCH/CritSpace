@@ -1,0 +1,3 @@
+DELETE FROM CRIT_PanelProps;
+DELETE FROM CRIT_Panels;
+DELETE FROM CRIT_Workspaces;

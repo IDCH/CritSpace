@@ -1,0 +1,12 @@
+ACTIONS                                 METHOD      URL                         RESPONSE DATA
+
+1) List all property types              GET         /vprops/types               Full JSON for all defined property types
+2) Get one property type                GET         /vprops/types?id=ID         JSON for the specified property type
+3) Create a new property                POST        /vprops/props               JSON formatted id of created property
+4) Get an existing property             GET         /vprops/props?id=ID         JSON for the specified property 
+5) Create a new group from a template   POST        /vprops/groups              Full JSON for the created group structure
+6) Get an existing group                GET         /vprops/groups?id=ID        Full JSON for the identified group structure
+
+
+
+** Update a property
