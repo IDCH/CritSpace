@@ -1,0 +1,7 @@
+[{ 
+   "css" : "background-color",
+   "name" : "Background Color",
+   "desc" : "The background color.",
+   "type" : "text",
+   "style" : ""
+ }]

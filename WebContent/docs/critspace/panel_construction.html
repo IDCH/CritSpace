@@ -1,0 +1,37 @@
+<html>
+  <head>
+  </head>
+  
+  <body>
+  
+  <h1>Overview</h1>
+  <p>The Critspace framework defines the basic structure of a panel (a box with 
+  certain visual properties and control areas) but doesn't say anything about 
+  what type of content is displayed by the panel or how users can interact 
+  with that content. This task is deferred to panel extensions. Here we'll take 
+  a look at how to implement a panel extension. To do this, we'll walk through 
+  the process of creating a simple panel extension, the ImagePanel, that will
+  dispaly (you guessed it), an image.  
+  </p>
+  
+  <h1>Setting Up</h1>
+  
+  <pre>
+  (function() {  
+      var PANEL_TYPE = "org.idch.example.ImagePanel";
+      function ImagePanel(m_panel, cfg) {
+          m_panel.configure(cfg);
+          
+          
+      }
+      
+      IDCH.critspace.Workspace.register(PANEL_TYPE, ImagePanel);
+  })();
+  </pre>
+  
+  
+  <h1>Registration and the Constructor Method</h1>
+  <p>Rather than creating public classes
+  </body>
+</html>
+  
