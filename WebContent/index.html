@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html> 
+  <head>
+    <title>Testing Page</title>
+    <!--Include YUI Loader and CSS reset: --> 
+    <link type="text/css" rel="stylesheet" href="yui/yui_2.6.0/reset-fonts-grids/reset-fonts-grids.css"/>
+    <script type="text/javascript" src="yui/yui_2.8.0/yuiloader-dom-event/yuiloader-dom-event.js"></script>
+    
+    <!--  CSDL STYLESHEETS -->
+    <link type="text/css" rel="stylesheet" href="scripts/csdl/widgets/assets/controls.css"/>
+    <link type="text/css" rel="stylesheet" href="scripts/csdl/critspace/assets/critspace.css"/>
+    <link type="text/css" rel="stylesheet" href="scripts/csdl/critspace/assets/panel.css"/>
+    <link type="text/css" rel="stylesheet" href="critspace-page.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/tzivi.css"/>
+    <link type="text/css" rel="stylesheet" href="scripts/IDCH/images/assets/scroller.css"/>
+
+    <!--  CSDL JS Files -->
+    <script type="text/javascript" src="scripts/csdl/csdl.js"></script>
+    <script type="text/javascript" src="scripts/csdl/modules.js"></script>
+    <script type="text/javascript" src="scripts/IDCH/idch.js"></script>
+    
+    <script type="text/javascript" src="critspace-page.js"></script>
+
+</head>
+
+<body class="csdl-skin-crit csdl-skin">
+  <div id="topLayer">
+    <!--  Menu Bar -->
+    <div id="menubar">
+      <span style="position:absolute;right:0px;top:2px;padding-right:10px;">
+      </span>
+      <span id="colorList"></span>
+      <div class="menuitem">Menu</div>
+      <div class="menuitem">Menu</div>
+	</div>
+	
+    <!--  Side Bar -->
+    <div id="sidebar">
+      <div id="side-min" onclick="CSDL.controls.toggleSidebar();"></div>
+      <div id="side-max" style="visibility:hidden;" onclick="CSDL.controls.toggleSidebar();"></div>
+      <div id="logger"></div>
+	</div>
+	
+    <!--  Bottom Controls -->
+  
+    <!-- Menus -->
+  </div>
+
+  <div id="workspace">
+    <div id="controls"></div>
+  </div>
+  
+</body>
+</html>

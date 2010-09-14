@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html> 
+  <head>
+    <title>Testing Page</title>
+
+    <link type="text/css" rel="stylesheet" href="yui/yui_2.6.0/reset-fonts-grids/reset-fonts-grids.css"/>
+    <link type="text/css" rel="stylesheet" href="yui/yui_2.6.0/container/assets/skins/sam/container-skin.css" />
+    <link type="text/css" rel="stylesheet" href="yui/yui_2.6.0/container/assets/container.css"/>
+    <link type="text/css" rel="stylesheet" href="yui/yui_2.6.0/container/assets/container-core.css" />
+    
+    <link type="text/css" rel="stylesheet" href="scripts/csdl/widgets/assets/controls.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/csdl/critspace/critSpace.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/csdl/critspace/panel.css"/>
+
+    <!--  YAHOO USER INTERFACE FILES -->
+    <script type="text/javascript" src="yui/yui_2.6.0/utilities/utilities.js"></script>
+    <script type="text/javascript" src="yui/yui_2.6.0/selector/selector-beta-min.js"></script>
+    <script type="text/javascript" src="yui/yui_2.6.0/container/container-min.js"></script>
+    <script type="text/javascript" src="yui/yui_2.6.0/slider/slider-min.js"></script>
+    <script type="text/javascript" src="yui/yui_2.6.0/json/json-min.js"></script>
+
+    <!--  CSDL JS Files -->
+    <script type="text/javascript" src="scripts/csdl/csdl.js"></script>
+    <script type="text/javascript" src="scripts/csdl/modules.js"></script>
+
+<style>
+  #workspace { position: absolute; }
+  
+  #testpane {
+    position:absolute;
+    top:200px;
+    left:200px;
+    width:290px;
+    height:50px;
+    background:#DDD;
+    border:1px solid grey;
+  }
+  
+  /** Common properties */
+  .csdl-control        { float:left; }
+  .csdl-control .label { display:none;  }
+  
+  /* Format borderWidth control */ 
+  .csdl-skin-crit .csdl-control-borderWidth .controls        { width: 55px; height:18px;   }
+  .csdl-skin-crit .csdl-control-borderWidth .controls input  { width: 32px;  }
+  
+  .csdl-skin-crit .csdl-control-spin .controls .up-arrow,
+  .csdl-skin-crit .csdl-control-spin .controls .down-arrow { left : 36px; }
+
+  /* Format borderStyle control */   
+  .csdl-skin-crit .csdl-control-borderStyle .controls        { width: 72px; height:18px;   }
+  .csdl-skin-crit .csdl-control-borderStyle .controls input  { width: 50px; }
+  .csdl-skin-crit .csdl-control-borderStyle .controls .arrow { left:  53px; }
+  
+  .csdl-skin-crit .csdl-control-borderStyle .controls .menu         { width: 65px; max-height:150; }
+  .csdl-skin-crit .csdl-control-borderStyle .controls .menu .option { width: 55px; text-align:left; }
+  
+  .csdl-skin-crit .csdl-control-bdlg {
+    position:absolute;
+    width:180px;
+    height:70px;
+    background:#DDD;
+    border:1px solid grey;
+  }
+  .csdl-skin-crit .csdl-control-bdlg .label { display : block; } 
+
+  .csdl-skin-crit .csdl-control-bdlg .button {
+    color:#000;
+    font-size:.9em;
+    border:1px solid #666;
+    padding:2px 3px 2px 3px;
+    margin-right:15px;
+    margin-top:8px;
+        
+    border:2px solid #909090;
+    border-top-color: #F0F0F0;
+    border-left-color: #F0F0F0;
+    cursor:pointer;
+  }  
+  
+  .csdl-skin-crit .csdl-control-bdlg .button-press {
+    border:2px solid #909090;
+    border-bottom-color: #F0F0F0;
+    border-right-color: #F0F0F0;
+  }  
+  
+  .csdl-skin-crit .csdl-control-bdlg .button-ok     { position:absolute; top:35px; left:131px; }
+  .csdl-skin-crit .csdl-control-bdlg .button-cancel { position:absolute; top:35px; left:72px; }
+  
+  
+</style>
+
+<script type="text/javascript">
+  
+  var lang = YAHOO.lang;
+  
+  function onLoad() {
+      var identifier = "067e6162-3b6f-4ae2-a171-2470b63dff00";
+      var regex = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
+      if (identifier.match(regex))  alert("uuid");
+      else                          alert("name");
+       
+      /*
+      var vprops = new CSDL.visual.LineProperties();
+      var cfg = {
+        el : $("controls"),
+        visible : false,
+        pos : [100, 200]
+      };
+      
+      var dialog = new CSDL.controls.BorderDialog(cfg);
+      dialog.show([200, 200], vprops);
+*/
+      
+  }
+
+  function onFail() { 
+      // var tdd = new CSDL.controls.TextDropDown();
+  }
+  
+  function loadModules() {
+      CSDL.configureModules();
+      CSDL.register("vprops",   ["widgets/visual/VisualProperty.js"],     [], ["log", "map"]);
+      CSDL.register("stdprops", ["widgets/visual/StandardProperties.js"], [], ["vprops"]);
+      CSDL.register("tdd",      ["widgets/controls/TextDropDown.js"],     [], ["log", "kc"]);
+      CSDL.register("cp",       ["widgets/controls/ColorPicker.js"],      [], []);
+      CSDL.register("cs",       ["widgets/controls/ColorSwatch.js"],      [], ["cp"]);
+      CSDL.register("spin",     ["widgets/controls/SpinControl.js"],      [], ["log", "kc"]);
+      CSDL.register("slider",   ["widgets/controls/Slider.js"],           [], ["log", "kc"]);
+      CSDL.register("push",     ["widgets/controls/PushButton.js"],       [], ["log", "kc"]);
+      CSDL.register("bdlg",     ["widgets/controls/BorderDialog.js"],     [], ["cs", "spin", "tdd"]);
+             
+      CSDL.load(["tdd", "spin", "push", "bdlg", "cs", "slider", "stdprops"], onLoad, onFail);
+//      CSDL.load(["critspace"], init);
+  }
+
+  YAHOO.util.Event.addListener(window, "load", loadModules);
+  
+</script>	
+
+</head>
+
+<body class="csdl-skin-crit">
+  <div id="topLayer">
+    <!--  Menu Bar -->
+    <div id="menubar">
+      <span style="position:absolute;right:0px;top:2px;padding-right:10px;">
+      </span>
+      <span id="colorList"></span>
+      <div class="menuitem">Menu</div>
+      <div class="menuitem">Menu</div>
+	</div>
+	
+    <!--  Side Bar -->
+    <div id="sidebar">
+      <div id="side-min" onclick="CSDL.controls.toggleSidebar();"></div>
+      <div id="side-max" style="visibility:hidden;" onclick="CSDL.controls.toggleSidebar();"></div>
+	</div>
+	
+    <!--  Bottom Controls -->
+  
+    <!-- Menus -->
+  </div>
+
+  <div id="workspace">
+    <div id="controls"></div>
+  </div>
+  
+  
+  <form action="#" method="get">
+    <input type="hidden" id="saveData" name="saveData"/>
+    <input type="hidden" id="saveID" name="saveID" />
+  </form>
+
+</body>
+</html>
