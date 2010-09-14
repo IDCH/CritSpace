@@ -1,0 +1,11 @@
+# This is an sample file for specifying the properties used for the JUnit tests.
+# 
+
+
+# Propreties that define the database to be used for testing purposes. Keep in 
+# mind that this is a testing environment and things might go very badly wrong.
+# Select a database accordingly
+test.db.url=jdbc:mysql://www.example.com/test?useUnicode=true&amp;characterEncoding=UTF-8
+test.db.driver=com.mysql.jdbc.Driver
+test.db.user=me
+test.db.pass=mysecret
