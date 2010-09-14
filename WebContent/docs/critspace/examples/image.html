@@ -23,6 +23,12 @@
     <!-- Scripts and Styles for this page -->    
     <link type="text/css" rel="stylesheet" href="assets/setup.css"/>
     <script type="text/javascript" src="scripts/image.js"></script>
+    
+    <style>
+      #sidebar {
+       
+      }
+    </style>
 </head>
 
 <body class="csdl-skin-crit csdl-skin">
@@ -38,8 +44,10 @@
     
     <!--  Side Bar -->
     <div id="sidebar">
-      <div id="side-min" onclick="CSDL.controls.toggleSidebar();"></div>
-      <div id="side-max" style="visibility:hidden;" onclick="CSDL.controls.toggleSidebar();"></div>
+      <div id="left-handle"></div>
+      <div id="bottom-handle"></div>
+      <div id="side-min"></div>
+      <div id="side-max" style="visibility:hidden;"></div>
       <div id="logger"></div>
     </div>
     

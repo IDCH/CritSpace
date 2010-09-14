@@ -20,6 +20,35 @@ body.csdl-skin-crit {
   z-index          : 100;
 }
 
+.csdl-skin-crit #sidebar {
+  background-color : #CCC;
+  border-left      : 2px outset #000;
+  border-bottom    : 2px outset #000;
+  opacity          : 0.7;
+  
+  position         : fixed;
+  top              : 24px;
+  right            : 0px;
+  width            : 200px;
+  height           : 90%;
+  
+  padding-left     : 10px;
+  color            : #FFF;
+  z-index          : 100;
+}
+
+.csdl-skin-crit #sidebar #left-handle {
+  position : absolute; top : -4px; left : 0px;
+  width : 4px; height : 100%;
+  cursor:w-resize;
+}
+
+.csdl-skin-crit #sidebar #bottom-handle {
+  position : absolute; bottom : -4px; left : 0px;
+  width : 100%; height : 4px;
+  cursor:s-resize;
+}
+
 .csdl-skin-crit #menubar .menuitem {
   color:#DDD;
   background-color:#888;

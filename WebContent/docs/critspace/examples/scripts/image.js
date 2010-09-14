@@ -118,6 +118,7 @@ function main() {
 }
 
 function config() {
+    return;
     var CritspaceRepository = IDCH.critspace.Repository,
         VPropRepository = IDCH.vprops.BasicRepository,
         PanelRegistry = IDCH.critspace.PanelRegistry;
@@ -168,7 +169,7 @@ function config() {
 }
 
 function loadIDCH() {
-    IDCH.load(["critspace", "critspace-repo", "images-filmstrip", "tzivi-panel", "afed"], true, config, 
+    IDCH.load(["critspace", "critspace-repo", "critspace-chrome", "images-filmstrip", "tzivi-panel", "afed"], true, config, 
             function() { 
                 alert("Failed to load IDCH modules."); 
             });
