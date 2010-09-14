@@ -1,0 +1,272 @@
+/**
+ *  Title: panel.css
+ *  Version: 0.03 (alpha)
+ *  Author: 
+ *    George Luchesse, Neal Audenaert
+ *    Center for the Study of Digital Libraries
+ *    Department of Computer Science
+ *    Texas A&M University
+ *    neal@csdl.tamu.edu
+ *  
+ *  Description:
+ *      CSS Styles used by the CritSpace Panel module.    
+ *
+ *  Copyright TEES Center for the Study of Digital Libraries (CSDL),
+ *            George Luchesse, Neal Audenaert
+ *
+ *  ALL RIGHTS RESERVED. PERMISSION TO USE THIS SOFTWARE MAY BE GRANTED 
+ *  TO INDIVIDUALS OR ORGANIZATIONS ON A CASE BY CASE BASIS. FOR MORE 
+ *  INFORMATION PLEASE CONTACT THE DIRECTOR OF THE CSDL. IN THE EVENT 
+ *  THAT SUCH PERMISSION IS GIVEN IT SHOULD BE UNDERSTOOD THAT THIS 
+ *  SOFTWARE IS PROVIDED ON AN AS IS BASIS. THIS CODE HAS BEEN DEVELOPED 
+ *  FOR USE WITHIN A PARTICULAR RESEARCH PROJECT AND NO CLAIM IS MADE AS 
+ *  TO IS CORRECTNESS, PERFORMANCE, OR SUITABILITY FOR ANY USE.
+ */
+
+/** Defines the container panel that contains the panel's visual layer
+ *  and the control areas. */
+.csdl-skin-crit .crit-panel-c { position  : absolute; }
+
+/** The visible background on which content will be displayed. */
+.csdl-skin-crit .crit-panel-c .crit-panel {
+  cursor           : move;  background-color : #DDD;
+  border           : 1px solid #666;}
+
+/** Defines the body div to which all content will be added. */
+.csdl-skin-crit .crit-panel-c .crit-panel .body {
+  position         : absolute;
+  top              : 0px;
+  left             : 0px;
+  width            : 100%;
+  height           : 100%;
+  border           : 0px solid white;
+  background-color : transparent;
+  overflow         : hidden;
+  z-index          : 0;
+}
+
+/* ****************************
+ * Control Regions Styles
+ */  
+ 
+/* Basic control area style. */ 
+.csdl-skin-crit .crit-panel-c .control-region {
+  position         : absolute;
+  font-size        : 10px;
+  background-color : transparent;
+  border           : 0px solid green;
+}
+
+/* Styles for the specific control areas. */
+.csdl-skin-crit .crit-panel-c .bottom { width:100%;  height:20px; bottom:-25px;}.csdl-skin-crit .crit-panel-c .top    {              height:20px; top:-25px;  left:52px;   right:0px; }
+.csdl-skin-crit .crit-panel-c .right  { width:20px;  height:100%; top:0px;    right:-25px; }
+.csdl-skin-crit .crit-panel-c .left   { width:20px;  height:100%; top:0px;    left:-25px; }
+
+.csdl-skin-crit .crit-panel-c .tab    { width:50px;  height:20px; top:-21px;  left:0px;
+                                        cursor:move; background-image : url(tab.png); }
+.csdl-skin-crit .crit-panel-c .close  { width:20px;  height:20px; top:-25px;  right:-25px;
+                                        cursor:pointer; background:url(close.gif);}
+.csdl-skin-crit .crit-panel-c .resize { width:12px;  height:12px; bottom:0px; right: 0px; 
+                                        cursor:se-resize; background:url(br2.png); z-index:1; }
+
+/** Defines style for buttons in the toolbar controls. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control        { float:left; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control .label { display:none; }
+
+/* General styles for the color swatch picker. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control-cswatch              { margin:0px; padding: 0px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-cswatch .controls    { width:20px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-cswatch .selected a  { border:1px dotted #CCC; }
+
+/* General styles for the push button control. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control-button                { margin:0px; padding: 0px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-button .controls      { width:20px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-button .selected icon { border:1px dotted #CCC; }
+
+/* Styles for the background color swatch control. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control-bgcolor .controls a {
+  border : 1px dotted transparent;
+  padding:0px; margin: 0px;
+  
+  display : block;
+  background: url(bg-color.gif) no-repeat 0px 0px;
+  width:19px; height:19px;
+  text-decoration:none;
+}
+
+/* Styles for the border-style push button and control. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control-border { margin-top: 5px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-border .controls .icon {
+  border : 1px dotted transparent;
+  padding:0px; margin: 0px;
+  
+  display : block;
+  background: url(border.gif) no-repeat 0px 0px;
+  width:19px; height:19px;
+  text-decoration:none;
+}
+
+/* Styles for the border-style push button and control. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control-opacity { margin-top: 5px; }
+.csdl-skin-crit .crit-panel-c .right .csdl-control-opacity .controls .icon {
+  border : 1px dotted transparent;
+  padding:0px; margin: 0px;
+  
+  display : block;
+  background: url(opacity.gif) no-repeat 0px 0px;
+  width:19px; height:19px;
+  text-decoration:none;
+}
+
+/* Miscelaneous styles. */
+.csdl-skin-crit .crit-panel-c .right .csdl-control {
+}
+.crit-panel-c .ctrl-button { float:right; width:18px; height:18px; cursor:pointer; }
+
+/* For the right hand control panel, float left to preserve vertical alignmnet. */
+.crit-panel-c .right .ctrl-button { float:left; width:18px; height:18px;margin-bottom:2px;}
+
+.crit-panel-c .controlElement {
+  float:right;
+  vertical-align:center;
+}
+
+
+/* ****************************
+ * Border Config Control 
+ */ 
+/** CritSpace Panel border editor. */
+.crit-panel-be {
+  font-family       : verdana, times, sans-serif;
+  font-size         : 12px;
+  
+  height            : 44px;
+  width             : 208px;
+  background-color  : #DDD;
+  border            : 1px solid #666;
+  padding-right     : 3px;
+}
+
+/** Control areas for specifying the boder, width style, and color. */
+.crit-panel-be .width { width: 50px; margin-left: 4px; float: left; }
+.crit-panel-be .style { width: 70px; margin-left: 4px; float: left; }
+.crit-panel-be .color { width: 33px; margin-left: 4px; float: left; }
+
+.crit-panel-be .width .csdl-utils-tdd {
+  padding-left:8px;
+  margin:0px;
+  text-align:left;
+}
+
+/** Button displaying the current color. */
+.crit-panel-be .color .current-color {
+  width             : 12px;
+  height            : 12px;
+  margin-left       : 6px;
+  background-color  : red;
+  
+  border-width      : 2px;
+  border-style      : solid;
+  border-color      : #999 #333 #333 #999;
+  cursor            : pointer;
+}
+
+/** Text label to describe each control */
+.crit-panel-be .label { 
+  margin-top        : 1px; 
+  margin-bottom     : 3px; 
+  font-family       : Arial, sans-serif; 
+  font-weight       : bold; }
+
+/** Button to indicate that user is 'done' with the control */
+.crit-panel-be .button {
+  margin-bottom     : 3px;
+  margin-top        : 17px;
+  margin-left       : 4px;
+  font-family       : Arial, sans-serif;
+  font-weight       : bold;
+  width             : 35px;
+  float             : left;
+  text-align        : center;
+  background-color  : #DDD;
+  
+  border-width      : 2px;
+  border-style      : solid;
+  border-color      : #999 #333 #333 #999;
+  cursor            : pointer;
+}
+
+/** Highlighted form of the button. */
+.crit-panel-be .button-hi {
+  border-width  : 2px;
+  border-style  : solid;
+  border-color  : #333 #999 #999 #333;
+  
+}
+
+/* ****************************
+ * Opacity Config Control 
+ */ 
+/** CritSpace Panel opacity editor. */
+.crit-panel-oc {
+  font-family       : verdana, times, sans-serif;
+  font-size         : 12px;
+  padding           : 3px;
+  
+  height            : 56px;
+  width             : 156px;
+  background-color  : #DDD;
+  border            : 1px solid #666;
+}
+      
+.crit-panel-oc .label { float:left; font-size:11px; font-weight:bold; }
+.crit-panel-oc .info { float:right; font-size:11px; font-weight:normal; }
+      
+.crit-panel-oc .button {
+  float             : right;
+  margin-bottom     : 3px;
+  margin-top        : 2px;
+  margin-left       : 4px;
+  font-family       : Arial, sans-serif;
+  font-weight       : bold;
+  min-width         : 25px;
+  text-align        : center;
+  background-color  : #DDD;
+  padding-left      : 5px;
+  padding-right     : 5px;
+        
+  border-top        : 2px solid #999;
+  border-left       : 2px solid #999;
+  border-right      : 2px solid #333;
+  border-bottom     : 2px solid #333;
+  
+  cursor            : pointer;
+}
+      
+/** Highlighted form of the button. */
+.crit-panel-oc .button-hi {
+  border-top        : 2px solid #333;
+  border-left       : 2px solid #333;
+  border-right      : 2px solid #999;
+  border-bottom     : 2px solid #999;
+}
+  
+.crit-panel-oc .slider {
+  padding             : 0px;
+  margin              : 0px;
+  margin-top          : 15px;
+  margin-left         : 3px;
+  width               : 150px;
+  background          : url(bg-h2.gif);
+  background-repeat   : repeat-x;
+  background-position : 0px 2px;
+}
+      
+.sliderthumb { position: relative; left : 142px; }
+.sliderthumb img { cursor : pointer; }
+
+/* ****************************
+ * Miscelaneous Leftover Stuff
+ */               .crit-panel .textArea {  background: white;  border: none;  overflow:auto;  color:black;  margin:10px;}
+.slider-bg {  position: relative;  background:url(../style/bg-fader.png) repeat-x;  height:28px;  width:100px;}.slider-thumb {  cursor:default;  position: absolute;  top: 4px;}
+table { padding:0px; }

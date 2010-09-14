@@ -1,0 +1,34 @@
+
+.viewport { overflow : hidden; }
+
+/* Set base width */
+.pvz, .pvzsbg, pvzi, .pvzo, .pvzsm 
+  { margin:0; padding:0; width : 30px; }
+
+/* Main container element */
+.pvz { height:230px; margin-left:0px; position:absolute; top:0px; }
+
+/* Slider */
+.pvzs   { }
+
+/* Background */
+.pvzsbg { height:170px; background:url('bg-v.gif') 0px -10px repeat-y; }
+
+/* Slider bar */
+.pvzsb  { padding-left:3px; width:18px; height:18px;}
+.pvzsb img { padding:0px; margin:0px; }
+
+/* Zoom in/out buttons */
+.pvzi, .pvzo { margin:3px; height:9px; cursor:pointer;}
+.pvzi   { background:url('zoomin.gif')  4px 0px no-repeat; }    
+.pvzo   { background:url('zoomout.gif') 4px 0px no-repeat; }  
+
+/* Message */
+.pvzsm  { 
+  width:35px;
+  margin-left:-14px;
+  text-align:right;
+  height:20px; 
+  font-family:Verdana, serif; 
+  font-size:.9em; 
+}

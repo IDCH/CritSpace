@@ -1,0 +1,84 @@
+.filmStripWidget{
+  vertical-align:middle;
+  overflow:hidden;
+  height:170px;
+  width:100%;
+}
+.filmStripWidget .filmBody{
+  position:relative;
+  z-index:1;
+  overflow:hidden;
+}
+.filmStripWidget .sideScroll{
+  z-index:5;
+  height:100%;
+  width:20px;
+}
+.filmStripWidget .leftFloat{
+  float:left;
+  background-image:url(../style/film/back-l.png);
+  background-repeat: repeat-y;
+}
+.filmStripWidget .rightFloat{
+  float:right;
+  background-image:url(../style/film/back-r.png);
+  background-repeat: repeat-y;
+}
+.filmStripWidget .sideScroll a{
+  height:100%;
+  position:relative;
+  width:100%;
+  border: 0px;
+  cursor:pointer;
+  display:block;
+}
+.filmStripWidget .leftFloat a{
+  background-image:url(../style/film/left.png);    background-repeat:no-repeat;  background-position:center;
+}
+.filmStripWidget .leftFloat a:hover{
+  background-image:url(../style/film/left-h.png);  
+}
+
+.filmStripWidget .leftFloat a.disabled,
+.filmStripWidget .rightFloat a.disabled{
+  background:none;
+  cursor:default;
+}
+.filmStripWidget .rightFloat a{
+  background-image:url(../style/film/right.png);    background-repeat:no-repeat;  background-position:center;
+}
+.filmStripWidget .rightFloat a:hover{
+  background-image:url(../style/film/right-h.png);  
+}
+.filmStripWidget .image {
+  border:2px gray solid;
+  opacity: .9;
+}
+.filmStripWidget .selected {
+  border:2px green solid;
+  opacity: 1;
+}
+.filmStripWidget .image .add{
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  cursor:pointer;
+  background-color:white;
+  background-image:url(add.png);
+  opacity:.8;
+  width:20px;
+  height:20px;
+  z-index:2;
+}
+.filmStripWidget .image .view{
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  cursor:pointer;
+  background-color:white;
+  background-image:url(plus.png);
+  width:20px;
+  height:20px;
+  opacity:.8;
+  z-index:2;
+}
