@@ -176,7 +176,7 @@ function loadIDCH() {
 }
 
 function configureCSDLModules() {
-    CSDL.register("controls", [], [], ["tdd", "cp", "cs", "spin", "push", "slider", "bdlg"]);
+//    CSDL.register("controls", [], [], ["tdd", "cp", "cs", "spin", "push", "slider", "bdlg"]);
     var js = [
 //              "utils/Map.js",
 //              "utils/KeyCodes.js", 
@@ -205,7 +205,7 @@ function configureCSDLModules() {
 // configure source code dependencies
 YAHOO.util.Event.addListener(window, "load", function() {
     // Tell the IDCH loader where to find the base YUI and IDCH scripts
-    $P('yui.base.url',               "/js/yui/yui_2.8.0/");
+    $P('yui.base.url',               "/js/yui/yui_2.8.1/");
     $P('idch.scripts.url',           "/js/IDCH/");
     
     $P('idch.tzivi.sliderthumb',         "/CritSpace/assets/thumb-v.png");
@@ -225,7 +225,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
     
     // load the logger
     IDCH.configLogger("logger", function() {
-        configureCSDLModules();
+    	loadIDCH();
     });
 });
 
