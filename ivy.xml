@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="1.0">
+  <info organisation="org.idch.index" module="IDCHCore"/>
+  <dependencies>
+   
+    <dependency org="org.apache.commons" name="commons-lang" rev="2.1"/>
+    <dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1"/>
+  </dependencies>
+</ivy-module>
