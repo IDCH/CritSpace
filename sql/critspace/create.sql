@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS CRIT_Workspaces;
 CREATE TABLE IF NOT EXISTS CRIT_Workspaces (
     ws_id       SERIAL  PRIMARY KEY,
     owner_id    BIGINT UNSIGNED DEFAULT 0,
-    name        VARCHAR(255) NOT NULL,         // Max size for UNIQUE INDEX
+    name        VARCHAR(255) NOT NULL,         
     visibility  ENUM('private', 'public') DEFAULT 'private',
     
     UNIQUE (owner_id, name)
