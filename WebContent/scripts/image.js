@@ -44,7 +44,7 @@ function loadImage() {
             width  : { range : [50, 2000], defaultvalue : 275 },
             height : { range : [50, 2000], defaultvalue : 275 }
         } 
-    }
+    };
 
     var resolver = new IDCH.images.Resolver();
     var url      = "/CritSpace/images/tzi/NT1/";
@@ -119,16 +119,16 @@ function main() {
 
 function config() {
     return;
-    var CritspaceRepository = IDCH.critspace.Repository,
-        VPropRepository = IDCH.vprops.BasicRepository,
-        PanelRegistry = IDCH.critspace.PanelRegistry;
+    var I = IDCH, crit = IDCH.critspace;
+        CritspaceRepository = crit.Repository,
+        PanelRegistry       = crit.PanelRegistry,
+        VPropRepository     = I.vprops.BasicRepository;
     
     var vpropRepo = new VPropRepository(
             $P("idch.vprops.urls.types"),
             $P("idch.vprops.urls.groups"),
             $P("idch.vprops.urls.props"),
             $P("idch.vprops.timeout"));
-    
     
     // first step in processing chain: The repository is ready, load the 
     // initial set of panels.
@@ -142,9 +142,9 @@ function config() {
     }
     
     // second step in processing chain: The core panel types have been loaded,
-    // retrive the workspace
+    // retrieve the workspace
     function onPanelsReady() {
-        var name = "test/ws2"
+        var name = "test/ws2";
         m_repo.loadWorkspace (name, {
             success : function(ws) {
                 m_workspace = ws;
@@ -168,39 +168,6 @@ function config() {
     m_repo.on("ready", onRepoReady);
 }
 
-function loadIDCH() {
-    IDCH.load(["critspace", "critspace-repo", "critspace-chrome", "images-filmstrip", "tzivi-panel", "afed"], true, config, 
-            function() { 
-                alert("Failed to load IDCH modules."); 
-            });
-}
-
-function configureCSDLModules() {
-//    CSDL.register("controls", [], [], ["tdd", "cp", "cs", "spin", "push", "slider", "bdlg"]);
-    var js = [
-//              "utils/Map.js",
-//              "utils/KeyCodes.js", 
-//              "utils/Logger.js",  
-//              "widgets/visual/VisualProperty.js", 
-//              "widgets/visual/StandardProperties.js",
-
-//              "widgets/controls/TextDropDown.js", 
-//              "widgets/controls/ColorPicker.js", 
-//              "widgets/controls/ColorSwatch.js", 
-//              "widgets/controls/SpinControl.js", 
-//              "widgets/controls/PushButton.js", 
-//              "widgets/controls/Slider.js",
-//              "widgets/controls/BorderDialog.js"
-              ];
-    
-    for (var i = 0; i < js.length; i++) {
-        js[i] = "/CritSpace/scripts/csdl/" + js[i];
-    }
-    
-    YAHOO.util.Get.script(js, {
-        onSuccess : loadIDCH
-    });
-}
 
 // configure source code dependencies
 YAHOO.util.Event.addListener(window, "load", function() {
@@ -225,7 +192,14 @@ YAHOO.util.Event.addListener(window, "load", function() {
     
     // load the logger
     IDCH.configLogger("logger", function() {
-    	loadIDCH();
+    	var modules = ["critspace", "images-filmstrip", "tzivi-panel", "afed"];
+
+    	function onFail() {
+    		// TODO Need a better implementation for this
+    		alert("Failed to load IDCH modules."); 
+    	}
+    	
+    	IDCH.load(modules, true, config, onFail); 
     });
 });
 

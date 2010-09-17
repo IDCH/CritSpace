@@ -61,7 +61,7 @@ function config() {
     // second step in processing chain: The core panel types have been loaded,
     // retrive the workspace
     function onPanelsReady() {
-        var name = "test/ws2"
+        var name = "test/ws2";
         m_repo.loadWorkspace (name, {
             success : function(ws) {
                 m_workspace = ws;
