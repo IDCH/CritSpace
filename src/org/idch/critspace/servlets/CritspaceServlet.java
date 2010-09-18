@@ -18,7 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.idch.critspace.persist.CritspaceRepository;
 import org.idch.persist.RepositoryAccessException;
 import org.idch.util.LogService;
+import org.idch.vprops.persist.PropertyRepository;
 
+/**
+ * Generic Servlet implementation that provides basic functionality common to many different 
+ * different CritSpace related servlets. CritSpace servlets will typically extend this class
+ * rather than the HttpServlet class.
+ *  
+ * @author Neal Audenaert
+ */
 @SuppressWarnings("serial")
 public class CritspaceServlet extends HttpServlet {
     
@@ -42,20 +50,18 @@ public class CritspaceServlet extends HttpServlet {
             return;
 
         try {
+        	// make sure the vprop repository has been created 
+        	// XXX This is a bit of a hack - need to make sure we've gotten the right
+        	//	   vprop repo.
+        	PropertyRepository vpropRepo = PropertyRepository.get();
+        	vpropRepo.createIfNeeded();
+        	
             s_repo = CritspaceRepository.get();
-            if (!s_repo.probe()) {
-                // try to create the repository, if we can't find it.
-                LogService.logWarn("Critspace repository not yet initialized. " +
-                        "Trying to create it now.", LOGGER);
-                
-                if (!s_repo.create()) {
-                    s_repo = null;
-                    String msg = "Could not initialize CritspaceRepository database.";
-                    LogService.logError(msg, LOGGER);
-                    throw new ServletException(msg);
-                }
-            }
+            s_repo.createIfNeeded();
+            
+            
         } catch (RepositoryAccessException rae) {
+        	s_repo = null;
             String errmsg = "Could not load CritspaceRepository.";
             throw new ServletException(errmsg, rae);
         } 

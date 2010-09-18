@@ -42,24 +42,7 @@ public class VPropServlet extends HttpServlet {
 
         try {
             s_repo = PropertyRepository.get();
-            if (!s_repo.probe()) {
-                // try to create the repository, if we can't find it.
-                LogService.logWarn("Property repository not yet initialized. " +
-                        "Trying to create it now.", LOGGER);
-                
-                boolean success = s_repo.create();
-                
-                if (success) {
-                    // install default types
-                    s_repo.initTypes();
-                    LogService.logInfo("Created property repository.", LOGGER);
-                } else {
-                    s_repo = null;
-                    String msg = "Could not initialize VisualProperty database.";
-                    LogService.logError(msg, LOGGER);
-                    throw new ServletException(msg);
-                }
-            }
+            s_repo.createIfNeeded();
         } catch (RepositoryAccessException rae) {
             String errmsg = "Could not load PropertyRepository.";
             throw new ServletException(errmsg, rae);

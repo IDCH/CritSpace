@@ -49,23 +49,24 @@ public abstract class PropertyRepository implements IPropertyRepository {
      */
     public static final PropertyRepository get()
             throws RepositoryAccessException {
-        if (s_repository != null) 
-            return s_repository;
+    	// TODO This is very inflexible. Need to allow the specification of the 
+    	//      prop file to be used, or provide a more flexible method of 
+    	//      configuring this at some rate.
+    	
+    	if (s_repository == null) { 
+    		try {
+    			s_repository = get(ResourceBundle.getBundle(DEFAULT_PROP_BUNDLE));
+    		} catch (MissingResourceException ex) {
+    			String msg = null;
+    			RepositoryAccessException rae = 
+    				new RepositoryAccessException(msg);
+    			LogService.logError(msg, LOGGER, rae);
+
+    			throw rae;
+    		}
+    	}
         
-        // TODO This is very inflexible. Need to allow the specification of the 
-        //      prop file to be used, or provide a more flexible method of 
-        //      configuring this at some rate.
-        
-        try {
-            return get(ResourceBundle.getBundle(DEFAULT_PROP_BUNDLE));
-        } catch (MissingResourceException ex) {
-            String msg = null;
-            RepositoryAccessException rae = 
-                new RepositoryAccessException(msg);
-            LogService.logError(msg, LOGGER, rae);
-            
-            throw rae;
-        }
+        return s_repository;
     }
     
     @SuppressWarnings("rawtypes")
@@ -98,6 +99,30 @@ public abstract class PropertyRepository implements IPropertyRepository {
         }
         
         return s_repository;
+    }
+    
+    /** 
+     * Attempts to create the required database structures for this Repository.
+     *  
+     * @throws RepositoryAccessException
+     */
+    public synchronized void createIfNeeded() throws RepositoryAccessException {
+    	if (!s_repository.probe()) {
+			// try to create the repository, if we can't find it.
+			LogService.logWarn("Property repository not yet initialized. " +
+					"Trying to create it now.", LOGGER);
+
+			if (s_repository.create()) {
+				// install default types
+				s_repository.initTypes();
+				LogService.logInfo("Created property repository.", LOGGER);
+			} else {
+				s_repository = null;
+				String msg = "Could not initialize VisualProperty database.";
+				LogService.logError(msg, LOGGER);
+				throw new RepositoryAccessException(msg);
+			}
+		}
     }
     
     protected abstract void initialize(ResourceBundle bundle) 
