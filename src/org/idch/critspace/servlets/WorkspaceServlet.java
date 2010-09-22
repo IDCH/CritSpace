@@ -49,11 +49,17 @@ public class WorkspaceServlet extends CritspaceServlet {
             } else { 
                 // TODO need to validate permissions
                 // retrieve the named space
+                if (name.startsWith("/"))
+                    name = name.substring(1);
                 Map<String, Object> ws = s_repo.getWorkspace(id, name);
                 
-                resp.setCharacterEncoding("UTF-8");
-                resp.setContentType("text/javascript");
-                JSONObject.writeJSONString(ws, resp.getWriter());
+                if (ws == null) {
+                    resp.sendError(NOT_FOUND, "Could not load workspace " + name);
+                } else {
+                    resp.setCharacterEncoding("UTF-8");
+                    resp.setContentType("text/javascript");
+                    JSONObject.writeJSONString(ws, resp.getWriter());
+                }
             }
             
         } catch (RepositoryAccessException rae) {
