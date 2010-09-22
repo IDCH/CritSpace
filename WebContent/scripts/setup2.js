@@ -17,7 +17,7 @@ var panelDefns = [
       }];
 
 function main() {
-    alert("success");
+//    alert("success");
 }
 
 function config() {
