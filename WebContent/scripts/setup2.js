@@ -9,11 +9,12 @@
 (function() {
     
 var panelDefns = [
-      { js   : ["scripts/TextPanel.js"],
-        type : "org.idch.examples.TextPanel",
+      { type : "org.idch.examples.TextPanel",
+        js   : ["scripts/TextPanel.js"],
         menu : "Text Panel",
         desc : "A simple panel for displaying some text.",
-        depends : []
+        depends : [],
+        modules : []
       }];
 
 function main() {
@@ -51,9 +52,6 @@ YAHOO.util.Event.addListener(window, "load", function() {
     $P("idch.critspace.urls.ws",     '/CritSpace/workspaces');
     $P("idch.critspace.urls.panels", '/CritSpace/panels');
     
-    $P("idch.critspace.urls.ws",     '/CritSpace/workspaces');
-    $P("idch.critspace.urls.panels", '/CritSpace/panels');
-    
     $P("idch.vprops.urls.types",  "/CritSpace/vprops/types");
     $P("idch.vprops.urls.groups", "/CritSpace/vprops/groups");
     $P("idch.vprops.urls.props",  "/CritSpace/vprops/properties");
@@ -61,14 +59,10 @@ YAHOO.util.Event.addListener(window, "load", function() {
     
     // load the logger
     IDCH.configLogger("logger", function() {
-    	var modules = ["critspace", "images-filmstrip", "tzivi-panel", "afed"];
-
-    	function onFail() {
-    		// TODO Need a better implementation for this
-    		alert("Failed to load IDCH modules."); 
-    	}
-    	
-    	IDCH.load(modules, true, config, onFail); 
+    	var modules = ["critspace"];
+    	IDCH.load(modules, true, config, function() {
+            alert("Failed to load IDCH modules."); 
+        }); 
     });
 });
 
