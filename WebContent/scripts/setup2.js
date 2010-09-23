@@ -26,8 +26,8 @@ function config() {
     	config = {
 	    	panels : panelDefns,
 	    	vpropsRepository : new IDCH.vprops.BasicRepository(
-		            $P(CritSpace.VPROP_URL_TYPES), $P(CritSpace.VPROP_URL_GROUP),
-		            $P(CritSpace.VPROP_URL_PROPS), $P(CritSpace.VPROP_TIMEOUT))
+		            $P(CritSpace.VPROP_URL_TYPES), $P(CritSpace.VPROP_URL_PROPS), 
+		            $P(CritSpace.VPROP_URL_GROUP), $P(CritSpace.VPROP_TIMEOUT))
 	    };
     
     CritSpace.init(config,  {
