@@ -74,6 +74,9 @@ public class WorkspaceServlet extends CritspaceServlet {
         
         try {
             String name = req.getParameter(PARAM_NAME);
+            if (name.startsWith("/"))
+                name = name.substring(1);
+            
             Map<String, Object> data = s_repo.createWorkspace(null, name);
             
             if (data != null) {
