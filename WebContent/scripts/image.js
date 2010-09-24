@@ -34,18 +34,6 @@ var panelDefns = [
 
  
 function loadImage() {
-    var vcfg = {  
-        position : {
-            top  : { defaultvalue : 300 },
-            left : { defaultvalue : 25 }
-        },
-
-        size : {
-            width  : { range : [50, 2000], defaultvalue : 275 },
-            height : { range : [50, 2000], defaultvalue : 275 }
-        } 
-    };
-
     var resolver = new IDCH.images.Resolver();
     var url      = "/CritSpace/images/tzi/NT1/";
     
@@ -74,18 +62,6 @@ function loadImage() {
 }
 
 function initFilmstrip() {
-//    var vcfg = {  
-//        position : {
-//            top  : { defaultvalue : 50 },
-//            left : { defaultvalue : 25 }
-//        },
-//
-//        size : {
-//            width  : { range : [50, 2000], defaultvalue : 800 },
-//            height : { range : [166, 166], defaultvalue : 166 }
-//        } 
-//    };
-    
     var resolver = 
         new IDCH.images.APIResolver($P('idch.afed.facsim.image.servlet'));
     var id = 11237;
