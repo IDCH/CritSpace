@@ -5,47 +5,31 @@
   <head>
     <title>Testing Page</title>
     <!--Include YUI Loader and CSS reset: --> 
-    <link type="text/css" rel="stylesheet" href="/js/yui/yui_2.8.0/reset-fonts-grids/reset-fonts-grids.css"/>
-    <script type="text/javascript"          src="/js/yui/yui_2.8.0/yuiloader-dom-event/yuiloader-dom-event.js"></script>
-    
-    <!--  CSDL STYLESHEETS -->
-    <link type="text/css" rel="stylesheet" href="/CritSpace/scripts/csdl/widgets/assets/controls.css"/>
-    <link type="text/css" rel="stylesheet" href="/CritSpace/assets/critspace/critspace.css"/>
-    <link type="text/css" rel="stylesheet" href="/CritSpace/assets/critspace/panel.css"/>
-    <link type="text/css" rel="stylesheet" href="/CritSpace/assets/tzivi.css"/>
-    
-    <link type="text/css" rel="stylesheet" href="/js/IDCH/images/assets/scroller.css"/>
+    <link type="text/css" rel="stylesheet" href="/js/yui/yui_2.8.1/reset-fonts-grids/reset-fonts-grids.css"/>
+    <script type="text/javascript" src="/js/yui/yui_2.8.1/yuiloader-dom-event/yuiloader-dom-event.js"></script>
     
     <!--  CSDL JS Files -->
-    <script type="text/javascript" src="/CritSpace/scripts/csdl/csdl.js"></script>
     <script type="text/javascript" src="/js/IDCH/idch.js"></script>
 
+    <!--  CRITSPACE STYLESHEETS -->
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/critspace/assets/critspace.css"/>
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/critspace/assets/panel.css"/>
+    
     <!-- Scripts and Styles for this page -->    
     <link type="text/css" rel="stylesheet" href="assets/setup.css"/>
     <script type="text/javascript" src="scripts/setup.js"></script>
 </head>
 
-<body class="csdl-skin-crit csdl-skin">
+<body class="csdl-skin csdl-skin-crit yui-skin-sam">
   <div id="chrome">
     <!--  Menu Bar -->
     <div id="menubar">
-      <span style="position:absolute;right:0px;top:2px;padding-right:10px;">
-      </span>
-      <span id="colorList"></span>
-      <div class="menuitem">Menu</div>
-      <div class="menuitem">Menu</div>
+      <span style="position:absolute;right:0px;top:2px;padding-right:10px;"></span>
+      <div id="mymenubar" class="yuimenubar"></div> 
     </div>
     
-    <!--  Side Bar -->
-    <div id="sidebar">
-      <div id="side-min" onclick="CSDL.controls.toggleSidebar();"></div>
-      <div id="side-max" style="visibility:hidden;" onclick="CSDL.controls.toggleSidebar();"></div>
-      <div id="logger"></div>
-    </div>
-    
-    <!--  Bottom Controls -->
-  
-    <!-- Menus -->
+    <div id="sidebar"></div>
+    <div id="tabpanels"></div>
   </div>
 
   <div id="workspace">

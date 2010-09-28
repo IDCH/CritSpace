@@ -31,7 +31,7 @@ function TextPanel(m_panel, m_cfg) {
     m_panel.configure(m_cfg);
     
     var m_body = m_panel.getBody();
-    m_body.innerHTML = m_cfg.text || "Why don't you love me?";
+    m_body.innerHTML = m_cfg.props.text || "Why don't you love me?";
 }
 
 // PUBLICIZE & ATTACH TO WORKSPACE
