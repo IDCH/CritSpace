@@ -18,7 +18,6 @@ package org.idch.critspace.persist;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.idch.critspace.Panel;
 import org.idch.critspace.Workspace;
@@ -39,9 +38,9 @@ public class PanelTests extends TestCase {
     private long m_wsId = -1;
     
     public void setUp() throws Exception {
-        m_propRepo = PropertyRepository.get(ResourceBundle.getBundle("test"));
-        
         DBBackedRepository.setPropertyBundle(PROP_BUNDLE);
+        
+        m_propRepo = PropertyRepository.get();
         m_repository = CritspaceRepository.get();
         m_repository.drop();
         m_propRepo.drop();
