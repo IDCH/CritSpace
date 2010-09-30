@@ -245,41 +245,6 @@ public final class MySQLPropertyRepository extends PropertyRepository {
     //========================================================================
     
     /**
-     * Helper method that attempts to rollback a transaction, logging and 
-     * supressing any exceptions.
-     *  
-     * @param conn the connection to rollback
-     */
-    private void rollback(Connection conn) {
-        String msg = "Could not rollback transaction.";
-        try {
-            conn.rollback();
-        } catch (SQLException sqe) {
-            LogService.logError(msg, LOGGER, sqe );
-            
-            throw new RuntimeException(sqe);
-        }
-    }
-    
-    /**
-     * Helper method that attempts to close a transaction, logging and 
-     * supressing any exceptions.
-     *  
-     * @param conn the connection to close
-     */
-    private void close(Connection conn) {
-        String msg = "Could not close connection.";
-        try { 
-            if (conn != null)
-                conn.close();
-        } catch (SQLException sqe) {
-            LogService.logError(msg, LOGGER, sqe);
-            
-            throw new RuntimeException(sqe);
-        }
-    }
-    
-    /**
      * 
      * @param id
      * @param css
@@ -309,9 +274,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         boolean success = false;
         
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             synchronized (m_propTypeCache) {
                 PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                 if (proxy.create(type)) { 
@@ -345,9 +308,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openReadOnly();
             synchronized (m_propTypeCache) {
                 PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                 types = proxy.listAll();
@@ -397,8 +358,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
                 
                 type = m_propTypeCache.get(id);
                 if (type == null || bypassCache) {  
-                    conn = m_provider.getConnection();
-                    conn.setReadOnly(true);
+                    conn = openReadOnly();
                     PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                     type = proxy.restore(id);
                     
@@ -449,8 +409,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         VisualProperty vprop = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
+            conn = openTransaction();
             
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             vprop = proxy.create(type, defaults, value, enabled);
@@ -470,8 +429,9 @@ public final class MySQLPropertyRepository extends PropertyRepository {
     }
     
     /**
+     * Updates the database record for the provided property.
      * 
-     * @param prop
+     * @param prop The property to update.
      * @return
      * @throws RepositoryAccessException
      */
@@ -480,9 +440,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         boolean success = false;
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             success = proxy.update(prop);
             conn.commit();
@@ -499,6 +457,8 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         
         return success;
     }
+    
+    
     
     /**
      * 
@@ -524,9 +484,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         VisualProperty vprop = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openTransaction();
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             vprop = proxy.restore(id);
         } catch (Exception ex) {
@@ -549,9 +507,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
     public Group createGroup(Group group) throws RepositoryAccessException {
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             GroupProxy proxy = new GroupProxy(conn);
             proxy.createGroup(group);
             conn.commit();
@@ -572,9 +528,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Group group = null;
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openTransaction();
             GroupProxy proxy = new GroupProxy(conn);
             Map<String, Object> data = proxy.restoreGroup(id);
             group = new Group(data);

@@ -19,10 +19,14 @@ package org.idch.vprops.persist;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.idch.persist.DBBackedRepository;
 import org.idch.persist.RepositoryAccessException;
 import org.idch.util.LogService;
 
-public abstract class PropertyRepository implements IPropertyRepository {
+public abstract class PropertyRepository
+extends DBBackedRepository 
+implements IPropertyRepository {
+    
     protected static final String LOGGER = PropertyRepository.class.getName();
 
     public final static String DB_SRCRIPTS_PROP = "org.idch.vprops.sqldir";
