@@ -200,10 +200,6 @@ public class PanelsServlet extends CritspaceServlet {
      *   <li><em>vprops</em> The JSON object literal representing the 
      *          new visual propries group associated with this panel</li>
      *   <li><em>props</em> A JSON object literal</li>
-     * 
-     * 
-     * 
-     * 
      */
     public void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws IOException {
