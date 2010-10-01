@@ -14,9 +14,11 @@
     <!-- CRITSPACE SERVELETS -->
     <servlet> <servlet-name>Workspaces</servlet-name>      <servlet-class>org.idch.critspace.servlets.WorkspaceServlet</servlet-class> </servlet>
     <servlet> <servlet-name>Panels</servlet-name>          <servlet-class>org.idch.critspace.servlets.PanelsServlet</servlet-class> </servlet>
+    <servlet> <servlet-name>PanelProperties</servlet-name> <servlet-class>org.idch.critspace.servlets.PanelProperties</servlet-class> </servlet>
     
     <servlet-mapping> <servlet-name>Workspaces</servlet-name> <url-pattern>/workspaces</url-pattern> </servlet-mapping>
     <servlet-mapping> <servlet-name>Panels</servlet-name>     <url-pattern>/panels</url-pattern> </servlet-mapping>
+    <servlet-mapping> <servlet-name>Panels</servlet-name>     <url-pattern>/props</url-pattern> </servlet-mapping>
     
     
 	<welcome-file-list>
