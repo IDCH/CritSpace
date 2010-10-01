@@ -31,6 +31,7 @@ public class CritspaceServlet extends HttpServlet {
     public static final int CONFLICT       = HttpServletResponse.SC_CONFLICT;
     
     public static final int CREATED        = HttpServletResponse.SC_CREATED;
+    public static final int OK             = HttpServletResponse.SC_OK;
 
     protected static CritspaceRepository s_repo;
     

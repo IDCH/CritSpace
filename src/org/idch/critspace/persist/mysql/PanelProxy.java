@@ -71,6 +71,13 @@ public class PanelProxy extends PersistenceProxy {
         "  FROM CRIT_PanelProps" +
         " WHERE panel_id = ?";
     
+    private final static int GET_PROP_ID = 1;
+    private final static int GET_PROP_NAME = 2;
+    private final static String GET_PROP_SQL = 
+        "SELECT prop_value" +
+        "  FROM CRIT_PanelProps" +
+        " WHERE panel_id = ? AND prop_name = ?";
+    
     private final static int SET_ID    = 1;
     private final static int SET_NAME  = 2;
     private final static int SET_VALUE = 3;
@@ -78,6 +85,12 @@ public class PanelProxy extends PersistenceProxy {
         "INSERT INTO CRIT_PanelProps (panel_id, prop_name, prop_value) " +
         "VALUES (?, ?, ?) " +
         "ON DUPLICATE KEY UPDATE prop_value = VALUES(prop_value)";
+    
+    private final static int DEL_ID    = 1;
+    private final static int DEL_NAME  = 2;
+    private final static String DEL_PROP_SQL = 
+        "DELETE FROM CRIT_PanelProps " + 
+        " WHERE panel_id = ? AND prop_name = ?";
     
     //========================================================================
     // CONSTRUCTORS & FINALIZATION
@@ -241,6 +254,48 @@ public class PanelProxy extends PersistenceProxy {
         stmt.setString(SET_VALUE, value);
 
         stmt.executeUpdate();
+    }
+    
+    /**
+     * Deletes a custom property value for the specified panel. Properties 
+     * provide a simple key/value storage that third party code can use for 
+     * persistent storage of information about a Panel's state.
+     * 
+     * @param panelId the panel whose property is to be deleted
+     * @param name the property to delete
+     * @param value the value to set for this property
+     * @throws SQLException
+     */
+    final void deleteProperty(long panelId, String name) throws SQLException {
+        PreparedStatement stmt = m_connection.prepareStatement(DEL_PROP_SQL);
+
+        stmt.setLong(DEL_ID, panelId);
+        stmt.setString(DEL_NAME, name);
+
+        stmt.executeUpdate();
+    }
+    
+    /**
+     * 
+     * @param panelId
+     * @return
+     * @throws SQLException
+     */
+    final String getProperty(long panelId, String prop)
+            throws SQLException {
+        String value = null;
+        
+        if (getPropsStmt == null) 
+            getPropsStmt = m_connection.prepareStatement(GET_PROP_SQL);
+        
+        getPropsStmt.setLong(GET_PROP_ID, panelId);
+        getPropsStmt.setString(GET_PROP_NAME, prop);
+        ResultSet results = getPropsStmt.executeQuery();
+        if (results.next()) {
+            value = results.getString(PROP_VALUE_COL);
+        }
+        
+        return value;
     }
     
     /**

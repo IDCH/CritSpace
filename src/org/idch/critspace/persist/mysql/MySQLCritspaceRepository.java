@@ -271,14 +271,77 @@ public class MySQLCritspaceRepository extends CritspaceRepository {
         } catch (Exception ex) {
             rollback(conn);
             String msg = "Could set property: " + prop + " = " + value + 
-                    " for panel (" + panelId + "). " + 
-                    ex.getMessage();
+                    " for panel (" + panelId + "). " + ex.getMessage();
         
             LogService.logError(msg, LOGGER, ex);
             throw new RepositoryAccessException(msg, ex);
         } finally {
             close(conn);
         }
+    }
+    
+    public void deleteProperty(long panelId, String prop) 
+            throws RepositoryAccessException {
+        Connection conn = null;
+        try {
+            conn = openTransaction();
+            PanelProxy proxy = new PanelProxy(conn);
+            proxy.deleteProperty(panelId, prop);
+            conn.commit();
+        } catch (Exception ex) {
+            rollback(conn);
+            String msg = "Could delete property: " + prop + 
+                    " for panel (" + panelId + "). " + ex.getMessage();
+        
+            LogService.logError(msg, LOGGER, ex);
+            throw new RepositoryAccessException(msg, ex);
+        } finally {
+            close(conn);
+        }
+    }
+    
+    public String getProperty(long panelId, String prop) 
+            throws RepositoryAccessException { 
+        
+        String value = null;
+        Connection conn = null;
+        try {
+            conn = openReadOnly();
+            PanelProxy proxy = new PanelProxy(conn);
+            value = proxy.getProperty(panelId, prop);
+        } catch (Exception ex) {
+            String msg = "Could get property value for panel " +
+            		"[" + panelId + ": " + prop + "]. " + ex.getMessage();
+        
+            LogService.logError(msg, LOGGER, ex);
+            throw new RepositoryAccessException(msg, ex);
+        } finally {
+            close(conn);
+        }
+            
+        return value;
+    }
+    
+    public Map<String, String> listProperties(long panelId) 
+            throws RepositoryAccessException { 
+        
+        Map<String, String> result = null;
+        Connection conn = null;
+        try {
+            conn = openReadOnly();
+            PanelProxy proxy = new PanelProxy(conn);
+            result = proxy.getProperties(panelId);
+        } catch (Exception ex) {
+            String msg = "Could get property value for panel " +
+                    "[" + panelId  + "]. " + ex.getMessage();
+        
+            LogService.logError(msg, LOGGER, ex);
+            throw new RepositoryAccessException(msg, ex);
+        } finally {
+            close(conn);
+        }
+            
+        return result;
     }
     
     public void setProperties(long panelId, Map<String, String> props) 
