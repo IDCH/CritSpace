@@ -115,6 +115,9 @@ public class PanelsServlet extends CritspaceServlet {
         return props;
     }
     
+    /**
+     * Get a panel or list all panels for a specific workspace.
+     */
     public void doGet(HttpServletRequest req, HttpServletResponse resp) 
         throws IOException {
         String errmsg = "Could retrieve the panel: ";
@@ -149,15 +152,36 @@ public class PanelsServlet extends CritspaceServlet {
             resp.sendError(INTERNAL_ERROR, error(errmsg, rae));
         }
     }
+    
+    public void doDelete(HttpServletRequest req, HttpServletResponse resp) 
+        throws IOException {
+        
+        long panelId = getId(req.getParameter(PARAM_ID), resp);
+        if (resp.isCommitted())
+            return;
 
+        try {
+            s_repo.deletePanel(panelId);
+            resp.setStatus(OK);
+        } catch (RepositoryAccessException rae) {
+            String errmsg = "Could not delete panel (id = " + panelId + "). " +
+            		"Error trying to save data.";
+            resp.sendError(INTERNAL_ERROR, error(errmsg, rae));
+        }
+    }
+
+    /**
+     * Handles PUT requests to set named properties for a panel.
+     */
     public void doPut(HttpServletRequest req, HttpServletResponse resp) 
             throws IOException {
         String errmsg = "Could set properties: ";
         
+        long panelId = getId(req.getParameter(PARAM_ID), resp);
+        if (resp.isCommitted())
+            return;
+        
         try {
-            long panelId = getId(req.getParameter(PARAM_ID), resp);
-            if (resp.isCommitted())
-                return;
             if (req.getParameter(PARAM_PROPS) == null) {
                 String prop  = req.getParameter(PARAM_PROP_NAME);
                 String value = req.getParameter(PARAM_PROP_VALUE);
