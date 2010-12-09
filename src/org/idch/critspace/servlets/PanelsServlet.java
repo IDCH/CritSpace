@@ -186,13 +186,18 @@ public class PanelsServlet extends CritspaceServlet {
                 String prop  = req.getParameter(PARAM_PROP_NAME);
                 String value = req.getParameter(PARAM_PROP_VALUE);
                 
-                if ((prop == null) || (value == null)) {
-                    errmsg += "property name and value must be supplied.";
+                if ((prop == null)) {
+                    errmsg += "property name must be supplied.";
                     resp.sendError(BAD_REQ, warn(errmsg, null));
                     return;
                 }
 
-                s_repo.setProperty(panelId, prop, value);
+                if (value == null) {
+                    s_repo.deleteProperty(panelId, prop);
+                } else { 
+                    s_repo.setProperty(panelId, prop, value);
+                }
+                
                 resp.setStatus(CREATED);
             } else {
                 JSONParser parser = new JSONParser();
