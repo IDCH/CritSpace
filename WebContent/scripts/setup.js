@@ -10,7 +10,7 @@
     
 var panelDefns = [
       { type : "org.idch.examples.TextPanel",
-        js   : ["scripts/TextPanel.js"],
+        js   : ["scripts/panels/TextPanel.js"],
         menu : "Text Panel",
         desc : "A simple panel for displaying some text.",
         depends : [],
