@@ -30,8 +30,6 @@ import org.idch.vprops.Group;
 import org.idch.vprops.persist.mysql.GroupProxy;
 
 public class MySQLCritspaceRepository extends CritspaceRepository {
-    private static final String LOGGER = CritspaceRepository.class.getName(); 
-    
     
     //========================================================================
     // DATABASE MANIPULATION METHODS
