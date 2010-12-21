@@ -30,9 +30,8 @@ import org.idch.persist.DBUtils;
 
 public class PanelProxy extends PersistenceProxy {
     //========================================================================
-    // CONSTRUCTORS & FINALIZATION
+    // SQL STATEMENTS
     //========================================================================
-    
     
     public static final String ID_COL   = "panel_id"; 
     public static final String WS_COL   = "ws_id"; 
