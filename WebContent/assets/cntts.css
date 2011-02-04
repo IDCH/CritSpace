@@ -78,7 +78,7 @@
     overflow-y:scroll;
     border:1px solid #999;
     font-family:TrebuchetMS; 
-    font-size:1.4em;
+    font-size:1.2em;
     padding:3px;
     cursor:auto;
 }
@@ -88,10 +88,38 @@
      line-height:1.6em;
 }
    
-.bt-panel .body span:before {
-     content:" " counter(vsnum);
+.bt-panel .body span.verse:before {
+     content:" " counter(vsnum) " ";
      color:darkblue;
      font-family:Verdana, TrebuchetMS;
      vertical-align:super;
      font-size: 0.5em; line-height: 0.5em
 }
+
+span.verse { font-family:Helvetica, sans-serif; font-size:1.0em; line-height:1.4em; }
+
+.yui-toolbar-container { display : none; }
+
+form.editvariant-window {
+    height:100px; 
+}
+  
+form.editvariant-window .buttons {
+    position:absolute;
+    top:75px; left:230px;
+}
+
+.viewport .layer .marker {
+  position:absolute;
+  background-color:blue;
+  opacity:.75;
+  width:5px;
+  height:5px;
+  cursor:pointer;
+}
+
+.viewport .layer .marker.selected {
+  background-color:red;
+}
+  
+  
