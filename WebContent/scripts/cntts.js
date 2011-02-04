@@ -151,7 +151,7 @@ YAHOO.util.Event.addListener(window, "load", function() {
     
     // load the logger
     IDCH.configLogger("logger", function() {
-    	var modules = ["critspace", "afed", "images-scroller", "tzivi", "tzivi-images", "selector", "animation"];
+    	var modules = ["critspace", "afed", "images-scroller", "nt-tce", "tzivi", "tzivi-images", "tzivi-markers", "selector", "animation"];
     	try {
     	    IDCH.load(modules, true, config, function() {
     	        alert("Failed to load IDCH modules."); 
