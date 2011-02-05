@@ -111,7 +111,8 @@ public class GroupProxy {
      * @throws SQLException
      */
     public final void createGroup(Group root) throws SQLException {
-        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL);
+        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL, 
+                PreparedStatement.RETURN_GENERATED_KEYS);
         
         Stack<Group> parents = new Stack<Group>();
         

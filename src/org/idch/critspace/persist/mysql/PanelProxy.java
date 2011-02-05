@@ -130,7 +130,8 @@ public class PanelProxy extends PersistenceProxy {
     throws SQLException {
         Map<String, Object> data = null;
         
-        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL);
+        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL, 
+                PreparedStatement.RETURN_GENERATED_KEYS);
         stmt.setLong(CREATE_WS, wsId);
         stmt.setLong(CREATE_GRP, groupId);
         stmt.setString(CREATE_TYPE, type);
