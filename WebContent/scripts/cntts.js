@@ -30,7 +30,7 @@ var panelDefns = [
       },
           
       { type : "org.idch.nt.BaseText",
-        js   : ["scripts/panels/CollationBaseText.js"],
+        js   : ["/js/IDCH/nt/CollationBaseText.js"],
         menu : "Base Text",
         desc : "Displays the the base text for a facsimile and supplies tools " +
         	   "to support the collation of textual variants.",
@@ -55,16 +55,6 @@ var panelDefns = [
         modules : ["afed"]
       },
       
-//      { type : "org.idch.afed.PageDisplayPanel",
-//        js   : ["scripts/panels/PageDisplayPanel.js"],
-//        menu : "Page Display",
-//        desc : "Displays a page from a digital facsimile. This is linked to " +
-//        		"the underlying facsimile so it can be used to navigate to the " +
-//        		"next and previous pages.",
-//        depends : [],
-//        modules : ["afed", "tzivi"]
-//      },
-      
       { type : "org.idch.images",
         js   : ["/js/IDCH/images/ImagePanel.js"],
         menu : "Image Panel",
@@ -74,7 +64,8 @@ var panelDefns = [
       }];
 
 /** Script gloabl referent to the main CritSpace environment. */
-var CritSpace;
+var CritSpace,
+    m_workspace;
 
 /**
  * 
@@ -106,10 +97,111 @@ function initFacsimileViewer() {
     }); 
 }
 
+function initGroup1() {
+    var id = 7736,
+        resolver = new IDCH.images.APIResolver($P('idch.afed.facsim.image.servlet'));
+    
+    // TODO load appropriate base text
+    
+    IDCH.afed.Facsimile.get(id, function(facs, msg) {
+        if (facs === false) {
+            $warn("Could not retrieve fasimile: " + id);
+            return;
+        }  
+        
+        m_workspace.createPanel(IDCH.afed.FACSIMILE_VIEWER, {
+            position : { y : 75, x : 50 },
+            size : { width  : 800, height : 166 },
+            props : { facsimileId : id },
+            imageProperties : { width : 152, height  : 146 }, 
+            resolver : resolver,
+            format : "small" 
+        });
+    }); 
+}
 
+function initGroup2() {
+    var id = 7736,
+        resolver = new IDCH.images.APIResolver($P('idch.afed.facsim.image.servlet'));
+    
+    // TODO load appropriate base text
+    
+    IDCH.afed.Facsimile.get(id, function(facs, msg) {
+        if (facs === false) {
+            $warn("Could not retrieve fasimile: " + id);
+            return;
+        }  
+        
+        m_workspace.createPanel(IDCH.afed.FACSIMILE_VIEWER, {
+            position : { y : 75, x : 50 },
+            size : { width  : 800, height : 166 },
+            props : { facsimileId : id },
+            imageProperties : { width : 152, height  : 146 }, 
+            resolver : resolver,
+            format : "small" 
+        });
+    }); 
+}
+
+function initCollationBaseText() {
+    var id = 7736,
+        servletUrl = $P('idch.afed.facsim.image.servlet'),
+        resolver = new IDCH.images.APIResolver(servletUrl);
+
+        bt_cfg = {
+            position : { y : 275, x : 50 },
+            size : { width  : 500, height : 600 },
+            props : { book : "Luke", chapter : 20 }
+        },
+        
+        facs_cfg = {
+            position : { y : 75, x : 50 },
+            size : { width  : 800, height : 166 },
+            props : { facsimileId : id },
+            imageProperties : { width : 152, height  : 146 }, 
+            resolver : resolver,
+            format : "small" 
+        };
+    
+    // load the facsimile viewer
+    IDCH.afed.Facsimile.get(id, function(facs, msg) {
+        if (facs === false) {
+            $warn("Could not retrieve fasimile: " + id);
+            return;
+        }  
+        
+        m_workspace.createPanel(IDCH.afed.FACSIMILE_VIEWER, facs_cfg); 
+    });
+    
+    // load the base text panel
+    m_workspace.createPanel(IDCH.nt.BASE_TEXT_PANEL, bt_cfg, 
+        function(panel) {
+            panel.on("ready", function() {
+                panel.setChapter("Luke", 20);
+            });
+        });
+}
+
+function initWorkspace(ws) {
+    var size = ws.listPanels().length,
+        name = ws.getName();
+    
+    m_workspace = ws;
+    if (size == 0) {            // this is a new workspace
+        if (name.startsWith("Group1/"))         initGroup1();
+        else if (name.startsWith("Group2/"))    initGroup2();
+        else                                    initCollationBaseText();
+    }
+}
 function main() {
+    
     try {
-        CritSpace.loadWorkspace("/test/ws2");
+        CritSpace.on("workspaceloaded", function(ws) {
+            ws.on("ready", function() {
+                initWorkspace(ws); 
+            });
+        });
+//        CritSpace.loadWorkspace("/test/ws2");
 //        initFacsimileViewer();
     } catch (ex) {
         alert(ex);
@@ -138,8 +230,8 @@ YAHOO.util.Event.addListener(window, "load", function() {
     $P('idch.scripts.url',           "/js/IDCH/");
     
     $P('idch.tzivi.sliderthumb',         "/CritSpace/assets/thumb-v.png");
-    $P('idch.afed.facsim.servlet',       "/AFED/facsimile");
-    $P('idch.afed.facsim.image.servlet', "/AFED/image");
+    $P('idch.afed.facsim.servlet',       "/afed/facsimile");
+    $P('idch.afed.facsim.image.servlet', "/afed/image");
     
     $P("idch.critspace.urls.ws",     '/CritSpace/workspaces');
     $P("idch.critspace.urls.panels", '/CritSpace/panels');
