@@ -563,6 +563,34 @@ lang.extend(LinkButton, IDCH.critspace.ControlButton, {
 // PAGE IMAGE LINK (PanelLink)  
 //=============================================================================
 
+function ScriptureReference(verseRef) {
+    // for now, we'll just parse a dot notation as in Luke.1.1
+    
+    var parts = verseRef.split(".");
+    this.book    = (parts.length > 0) ? parts[0] : null;
+    this.chapter = (parts.length > 1) ? parts[1] : null;
+    this.verse   = (parts.length > 2) ? parts[2] : null;
+}
+
+ScriptureReference.prototype = {
+
+    getOriginalReference : function() {
+        this._ref;
+    },
+    
+    getBook : function() {
+        return this.book;
+    },
+    
+    getChapter : function() {
+        return this.chapter;
+    },
+    
+    getVerse : function() {
+        return this.verse;
+    }
+};
+
 
 /**
  * @param link { PageImageLink } The link with which this marker is 
@@ -623,6 +651,9 @@ function VerseMarker(marker, link) {
                 
                 markers[verseId] = this;
                 this._verseId = verseId;
+                this._ref = new ScriptureReference(verseId);
+                marker.getEl().innerHTML = this._ref.getVerse();
+                
             } else {
                 throw new Error("Invalid verse id: not a string.");
             }
@@ -635,6 +666,10 @@ function VerseMarker(marker, link) {
             // While you could access this directly, I really   
             // don't want people touching my privates. 
             this._verseId;      
+        },
+        
+        getScriptureReference : function() {
+            return this._ref || null;
         }
         
     }, true);
@@ -647,14 +682,17 @@ function VerseMarker(marker, link) {
 
 function onMarkerPlaced(marker) {
     marker = new VerseMarker(marker, this);
-    marker.setVerse(this.getNextVerse());
+    marker.setVerseId(this.getNextVerse());
 }
 
 function onMarkerClicked(obj) {
-    var maker = obj.marker,
-        ev    = obj.ev;
+    var ev    = obj.ev,
+        marker = obj.marker,
+        ref    = (marker) ? marker.getScriptureReference() : null;
     
-    alert(marker);
+    this._editor.clearHighlight();
+    this._editor.scrollTo(ref.book, ref.chapter, ref.verse);
+    this._editor.highlightVerse(ref.book, ref.chapter, ref.verse);
 }
 
 function PageImageLink(basePanel, linkedPanels) {
@@ -665,16 +703,15 @@ function PageImageLink(basePanel, linkedPanels) {
     
     PageImageLink.superclass.constructor.call(
             this, basePanel, linkedPanels, PageImageLink.LINK_NAME);
-    
-    // This is a binary linking tool. We'll use this to keep track of the 
-    // target panel.
-    this.targetPanel = null;
 }
 
 PageImageLink.LINK_NAME = "IDCH.nt.PageImageLink";
 PanelLink.attachFactoryMethods(PageImageLink);
 
 lang.extend(PageImageLink, IDCH.critspace.PanelLink, {
+    _targetPanel : null,
+    
+    _lastAssignedVerse : null,
     
     /**
      * Attaches event listeners to newly added panels to monitor their state.
@@ -689,6 +726,7 @@ lang.extend(PageImageLink, IDCH.critspace.PanelLink, {
             // TODO implement sanity checks
              
             var layer = new IDCH.tzivi.MarkerLayer();
+            this._targetPanel = panel;
             
             // monitor and adjust markers
             layer.on("marker:create", onMarkerPlaced, this, true);
@@ -722,6 +760,7 @@ lang.extend(PageImageLink, IDCH.critspace.PanelLink, {
             if (viewport && viewport.hasLayer(this._markerLayer))
                 viewport.removeLayer(this._markerLayer);
             
+            this._targetPanel = null;
             this._markerLayer = null;
         } else if (type === IDCH.nt.BASE_TEXT_PANEL) {
             // monitor this as needed 
@@ -745,13 +784,39 @@ lang.extend(PageImageLink, IDCH.critspace.PanelLink, {
             : (type === IDCH.afed.PAGE_DISPLAY_PANEL);
     },
     
-    getNextVerse : function(referenceVerseId) {
+    /**
+     * Searches for and returns the next verse for which no marker has 
+     * been assigned. If the <code>verseRef</code> is supplied, this
+     * will begin searching at the specified verse, otherwise it will begin
+     * searching with the last assigned verse id.
+     */
+    getNextVerse : function(verseRef) {
+        var verseRef = lang.isString(verseRef) 
+                            ? verseRef  
+                            : this._lastAssignedVerse,
+            markers = this._markers,
+            verses  = this._verses,
+            ix = Math.max(0, this.getVerseIndex(verseRef)),
+            nextVerse = null;
+        
+        for (ix; ix < verses.length; ix++) {
+            if (!lang.isObject(markers[verses[ix]])) {
+                nextVerse = verses[ix];
+                break;
+            }
+        }
+        
+        this._lastAssignedVerse = nextVerse;
+        return nextVerse;
+    },
+    
+    clearVerseMarker : function(verseId) {
         
     },
     
     getVerseIndex : function(verseId) {
         return (lang.isValue(this.basePanel) && lang.isString(verseId)) 
-                    ? link._verses.indexOf(verseId.trim()) 
+                    ? this._verses.indexOf(verseId.trim()) 
                     : -2;
     },
     

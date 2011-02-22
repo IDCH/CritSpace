@@ -107,7 +107,8 @@ public class WorkspaceProxy {
      */
     Map<String, Object> create(User user, String name) throws SQLException {
         Map<String, Object> data = null;
-        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL); 
+        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL, 
+                PreparedStatement.RETURN_GENERATED_KEYS); 
         
         long ownerId = (user != null) ? user.getId() : 0;
         String visibility = (user != null) ? "'private" : "public";

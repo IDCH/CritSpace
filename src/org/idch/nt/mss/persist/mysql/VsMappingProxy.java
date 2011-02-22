@@ -164,7 +164,8 @@ public class VsMappingProxy extends PersistenceProxy {
     final long create(long facsimId, long imageId, int x, int y, 
             ScriptureReference ref)
     throws SQLException {
-        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL);
+        PreparedStatement stmt = m_connection.prepareStatement(CREATE_SQL, 
+                PreparedStatement.RETURN_GENERATED_KEYS);
         
         stmt.setLong(CREATE_F_ID,   facsimId);
         stmt.setLong(CREATE_IMG,    imageId);

@@ -323,7 +323,8 @@ class VisualPropertyProxy {
     void create(Group group, Map<String, VisualProperty> vprops) 
     throws SQLException {
         if (createVPropStatement == null)
-            createVPropStatement = m_connection.prepareStatement(CREATE_SQL);
+            createVPropStatement = m_connection.prepareStatement(CREATE_SQL, 
+                    PreparedStatement.RETURN_GENERATED_KEYS);
         
         // set the group id
         if (group != null) {
@@ -365,7 +366,8 @@ class VisualPropertyProxy {
         long id = -1;
         PreparedStatement stmt = null;
         try {
-            stmt = m_connection.prepareStatement(CREATE_SQL);
+            stmt = m_connection.prepareStatement(CREATE_SQL, 
+                    PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(CREATE_TYPE,   type.getId());
             stmt.setNull(CREATE_GRP_ID, Types.INTEGER);
             stmt.setNull(CREATE_NAME, Types.CHAR);
