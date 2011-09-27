@@ -1,0 +1,125 @@
+
+/* FORMATTING FOR THE BORDER PANEL. NEED TO MOVE TO panel.css */
+.csdl-skin-crit .csdl-control        { float:left; }
+.csdl-skin-crit .csdl-control .label { display:none;  }
+
+.csdl-skin-crit .csdl-control-bdlg {
+  position:absolute;
+  width:180px;
+  height:70px;
+  background:#DDD;
+  border:1px solid grey;
+}
+
+/* Format borderWidth control */ 
+.csdl-skin-crit .csdl-control-borderWidth .controls        { width: 55px; height:18px;   }
+.csdl-skin-crit .csdl-control-borderWidth .controls input  { width: 32px;  }
+
+.csdl-skin-crit .csdl-control-spin .controls .up-arrow,
+.csdl-skin-crit .csdl-control-spin .controls .down-arrow { left : 36px; }
+
+/* Format borderStyle control */   
+.csdl-skin-crit .csdl-control-borderStyle .controls        { width: 72px; height:18px;   }
+.csdl-skin-crit .csdl-control-borderStyle .controls input  { width: 50px; }
+.csdl-skin-crit .csdl-control-borderStyle .controls .arrow { left:  53px; }
+ 
+.csdl-skin-crit .csdl-control-borderStyle .controls .menu         { width: 65px; max-height:150; }
+.csdl-skin-crit .csdl-control-borderStyle .controls .menu .option { width: 55px; text-align:left; }
+
+.csdl-skin-crit .csdl-control-bdlg .label { display : block; } 
+
+.csdl-skin-crit .csdl-control-bdlg .button {
+  color:#000;
+  font-size:.9em;
+  border:1px solid #666;
+  padding:2px 3px 2px 3px;
+  margin-right:15px;
+  margin-top:8px;
+        
+  border:2px solid #909090;
+  border-top-color: #F0F0F0;
+  border-left-color: #F0F0F0;
+  cursor:pointer;
+}  
+  
+.csdl-skin-crit .csdl-control-bdlg .button-press {
+  border:2px solid #909090;
+  border-bottom-color: #F0F0F0;
+  border-right-color: #F0F0F0;
+}  
+  
+.csdl-skin-crit .csdl-control-bdlg .button-ok     { position:absolute; top:35px; left:131px; }
+.csdl-skin-crit .csdl-control-bdlg .button-cancel { position:absolute; top:35px; left:72px; }
+  
+/* FORMATTING FOR THE NOTE PANEL. */
+.note-panel .crit-panel textarea {
+  position:absolute; top:0px; left:0px;
+  background:transparent;
+  border:0px;
+  padding:5px;
+  height:99%;
+  width:99%
+}  
+  
+.note-panel .crit-panel .body img { 
+  position:absolute; top:0px; left:0px;
+  border:0px;
+}
+  
+#workspace { position: absolute; }
+  
+/* FORMATTING FOR BASE TEXT PANEL */
+  
+.bt-panel .body .basetext {
+    position:absolute;
+    top:0px; left:0px;
+    height:100%;
+    text-align:left;
+    overflow-y:scroll;
+    border:1px solid #999;
+    font-family:TrebuchetMS; 
+    font-size:1.2em;
+    padding:3px;
+    cursor:auto;
+}
+
+.bt-panel .body span {   
+     counter-increment:vsnum;
+     line-height:1.6em;
+}
+   
+.bt-panel .body span.verse:before {
+     content:" " counter(vsnum) " ";
+     color:darkblue;
+     font-family:Verdana, TrebuchetMS;
+     vertical-align:super;
+     font-size: 0.5em; line-height: 0.5em
+}
+
+span.verse { font-family:Helvetica, sans-serif; font-size:1.0em; line-height:1.4em; }
+
+.yui-toolbar-container { display : none; }
+
+form.editvariant-window {
+    height:100px; 
+}
+  
+form.editvariant-window .buttons {
+    position:absolute;
+    top:75px; left:230px;
+}
+
+.viewport .layer .marker {
+  position:absolute;
+  background-color:blue;
+  opacity:.75;
+  width:5px;
+  height:5px;
+  cursor:pointer;
+}
+
+.viewport .layer .marker.selected {
+  background-color:red;
+}
+  
+  

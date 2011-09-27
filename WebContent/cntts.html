@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html> 
+  <head>
+    <title>CNTTS Critspace Demo</title>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=utf-8" />
+    
+    <!--Include YUI Loader and CSS reset: --> 
+    <link type="text/css" rel="stylesheet" href="/js/yui/yui_2.8.1/reset-fonts-grids/reset-fonts-grids.css"/>
+    <script type="text/javascript" src="/js/yui/yui_2.8.1/yuiloader-dom-event/yuiloader-dom-event.js"></script>
+    
+    <!--  CSDL JS Files -->
+    <script type="text/javascript" src="/js/IDCH/idch.js"></script>
+
+    <!--  CRITSPACE STYLESHEETS -->
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/critspace/assets/critspace.css"/>
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/critspace/assets/panel.css"/>
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/images/assets/scroller.css"/>
+    <link type="text/css" rel="stylesheet" href="/js/IDCH/tzivi/assets/tzivi.css"/>
+    
+    <!-- Scripts and Styles for this page -->    
+    <link type="text/css" rel="stylesheet" href="assets/cntts.css"/>
+    <script type="text/javascript" src="scripts/cntts.js"></script>
+    
+    <style>
+    /* base text link */
+    .csdl-skin-crit .crit-panel-c .top .bt-link { 
+      margin-top: 5px;
+      border : 1px dotted transparent;
+      padding:0px; margin: 0px;
+      
+      display : block;
+      background: url(assets/link.png) no-repeat 0px 0px;
+      width:19px; height:19px;
+      text-decoration:none; 
+      float:right;
+    }
+    
+    .csdl-skin-crit .crit-panel-c .top .bt-link.active {
+        background-color : #DDD;
+        border : 1px dotted #AAA
+    } 
+    
+    .csdl-skin-crit .crit-panel-c .top .bt-link.linked {
+        background: url(assets/link_break.png) no-repeat 0px 0px;
+    }
+    
+    .csdl-skin-crit .crit-panel-c .bt-link-notice {
+      border : 1px solid #999;
+      background-color : lightyellow;
+      color : darkred;
+      width:175px; height:50px;
+      padding-top:15px;
+      font-weight: bold;
+      position : absolute;
+      right : 25px;
+      top : 15px;
+    }
+    
+    .csdl-skin-crit .crit-panel-c .marker.vsmarker {
+    }
+    
+    .viewport .layer .marker.vsmarker {
+      width:16px; height:16px;
+      background-color:transparent;
+      background: url(assets/page_white.png) no-repeat 0px 0px;
+      opacity:1;
+      
+      color:blue;
+      font-family:Verdana;
+      font-weight:bold;
+      text-align:center;
+      line-height:16px;
+      font-size:8px;
+    }
+    </style>
+</head>
+
+<body class="csdl-skin csdl-skin-crit yui-skin-sam">
+  <div id="chrome">
+    <!--  Menu Bar -->
+    <div id="menubar">
+      <span style="position:absolute;right:0px;top:2px;padding-right:10px;"></span>
+      <div id="mymenubar" class="yuimenubar"></div> 
+    </div>
+    
+    <div id="tabpanels"></div>
+  </div>
+
+  <div id="workspace">
+    <div id="controls"></div>
+  </div>
+  
+</body>
+</html>

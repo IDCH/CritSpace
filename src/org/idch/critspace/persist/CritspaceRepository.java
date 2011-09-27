@@ -11,13 +11,12 @@ package org.idch.critspace.persist;
 
 import org.idch.persist.DBBackedRepository;
 import org.idch.persist.RepositoryAccessException;
-import org.idch.vprops.persist.PropertyRepository;
 
 public abstract class CritspaceRepository 
 extends DBBackedRepository 
 implements ICritspaceRepository {
     
-    protected static final String LOGGER = PropertyRepository.class.getName();
+    protected static final String LOGGER = CritspaceRepository.class.getName();
 
     public final static String MODULE_NAME = "critspace";
     

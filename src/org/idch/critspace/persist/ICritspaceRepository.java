@@ -46,8 +46,17 @@ public interface ICritspaceRepository {
     
     public boolean deletePanel(long panelId) 
         throws RepositoryAccessException;
+
+    public String getProperty(long panelId, String prop) 
+        throws RepositoryAccessException;
+    
+    public Map<String, String> listProperties(long panelId) 
+        throws RepositoryAccessException;
     
     public void setProperty(long panelId, String prop, String value) 
+        throws RepositoryAccessException;
+    
+    public void deleteProperty(long panelId, String prop) 
         throws RepositoryAccessException;
     
     public void setProperties(long panelId, Map<String, String> props) 

@@ -19,7 +19,6 @@ package org.idch.critspace.persist;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.idch.critspace.Workspace;
@@ -37,10 +36,9 @@ public class WorkspaceTests extends TestCase {
     private CritspaceRepository m_repository = null;
     
     public void setUp() throws Exception {
-        PropertyRepository propRepo = 
-            PropertyRepository.get(ResourceBundle.getBundle("test"));
-        
         DBBackedRepository.setPropertyBundle(PROP_BUNDLE);
+        PropertyRepository propRepo = PropertyRepository.get();
+        
         m_repository = CritspaceRepository.get();
         m_repository.drop();
         propRepo.drop();
@@ -54,8 +52,7 @@ public class WorkspaceTests extends TestCase {
         // we tried. Ideally, we'd test this with an in memory database
         m_repository.drop();    
         
-        PropertyRepository propRepo = 
-            PropertyRepository.get(ResourceBundle.getBundle("test"));
+        PropertyRepository propRepo = PropertyRepository.get();
         propRepo.drop();
     }
     

@@ -19,8 +19,8 @@ package org.idch.vprops.persist;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
+import org.idch.persist.DBBackedRepository;
 import org.idch.vprops.Group;
 import org.idch.vprops.PropertyConfig;
 import org.idch.vprops.PropertyType;
@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 
 public class RepositoryDataAccessTests extends TestCase {
     
-    private static final String PROP_BUNDLE = "test";
+    private static final String PROP_BUNDLE = "test_repo";
     
     //======================================================================
     // 
@@ -46,9 +46,8 @@ public class RepositoryDataAccessTests extends TestCase {
     
     public void setUp() throws Exception {
         // Create a fresh new database every time we run a test.
-        
-        ResourceBundle bundle = ResourceBundle.getBundle(PROP_BUNDLE);
-        m_repository = PropertyRepository.get(bundle);
+        DBBackedRepository.setPropertyBundle(PROP_BUNDLE);
+        m_repository = PropertyRepository.get();
         m_repository.create();
     }
 

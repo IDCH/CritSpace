@@ -39,6 +39,7 @@ public class CritspaceServlet extends HttpServlet {
     public static final int CONFLICT       = HttpServletResponse.SC_CONFLICT;
     
     public static final int CREATED        = HttpServletResponse.SC_CREATED;
+    public static final int OK             = HttpServletResponse.SC_OK;
 
     protected static CritspaceRepository s_repo;
     
@@ -54,10 +55,8 @@ public class CritspaceServlet extends HttpServlet {
         	// XXX This is a bit of a hack - need to make sure we've gotten the right
         	//	   vprop repo.
         	PropertyRepository vpropRepo = PropertyRepository.get();
-        	vpropRepo.createIfNeeded();
         	
             s_repo = CritspaceRepository.get();
-            s_repo.createIfNeeded();
             
             
         } catch (RepositoryAccessException rae) {

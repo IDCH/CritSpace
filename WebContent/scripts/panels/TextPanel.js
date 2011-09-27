@@ -8,9 +8,7 @@
 IDCH.namespace("examples.Panels");
 (function() {
 
-var util          = YAHOO.util,
-    lang          = YAHOO.lang,
-    dom           = util.Dom;
+var util = YAHOO.util, lang = YAHOO.lang, dom  = util.Dom;
 
 //========================================================================= 
 // PANEL IMPLEMENTATION
@@ -33,8 +31,7 @@ function TextPanel(m_panel, m_cfg) {
     m_panel.configure(m_cfg);
     
     var m_body = m_panel.getBody();
-    
-    m_body.innerHTML = m_cfg.text || "Why don't you love me?";
+    m_body.innerHTML = m_cfg.props.text || "Why don't you love me?";
 }
 
 // PUBLICIZE & ATTACH TO WORKSPACE
@@ -48,5 +45,18 @@ IDCH.examples.Panels.TEXT_PANEL = PANEL_TYPE;
 
 // finally, register this panel constructor with the workspace
 IDCH.critspace.PanelRegistry.register(PANEL_TYPE, TextPanel);
+// Register with Menu System:
+//{   type : "org.idch.examples.TextPanel",
+//    menu : "Text Panel",
+//    desc : "A simple panel for displaying some text.",
+//    depends : [],
+//    configure : function() {
+//        // Properties should be entered through dialog
+//        var configProps = {
+//              text : "Why don't you love me?"
+//        };
+//        return configProps;
+//    }
+//  }
 
 })();

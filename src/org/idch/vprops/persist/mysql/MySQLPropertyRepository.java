@@ -17,16 +17,12 @@
 package org.idch.vprops.persist.mysql;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
-import org.idch.persist.ConnectionProvider;
-import org.idch.persist.DatabaseException;
 import org.idch.persist.RepositoryAccessException;
 import org.idch.util.Cache;
 import org.idch.util.LogService;
@@ -40,7 +36,7 @@ import org.idch.vprops.persist.PropertyRepository;
 public final class MySQLPropertyRepository extends PropertyRepository {
     private final static String LOGGER = IPropertyRepository.class.getName();
     
-    private ConnectionProvider m_provider;
+//    private ConnectionProvider m_provider;
     
     private File m_sqlDirectory; 
     
@@ -57,71 +53,10 @@ public final class MySQLPropertyRepository extends PropertyRepository {
      */
     public MySQLPropertyRepository() { }
     
-    @Override
-    protected void initialize(ResourceBundle bundle)
-        throws RepositoryAccessException {
-        
-        String url    = bundle.getString(DB_URL_PROP);
-        String driver = bundle.getString(DB_DRIVER_PROP);
-        String user   = bundle.getString(DB_USER_PROP);
-        String pass   = bundle.getString(DB_PASS_PROP);
-        
-        try {
-            m_provider = new ConnectionProvider(url, driver, user, pass);
-        } catch (DatabaseException dbe) {
-            throw new RepositoryAccessException("Could not connect to database", dbe);
-        }
-        File dir = new File(bundle.getString(DB_SRCRIPTS_PROP));
-        if (dir.canRead() && dir.isDirectory()) {
-            m_sqlDirectory = dir;
-        } else { 
-            m_sqlDirectory = null;
-            LogService.logInfo("Could not load database configuration " +
-                    "scripts.", LOGGER);
-        } 
-    }
-    
     //========================================================================
     // DATABASE MANIPULATION METHODS
     //========================================================================
     
-    // XXX Magic Strings (vprops.sql, etc) . Move to properties file
-    
-    /**
-     * Helper method that executes the provided script file and probes to see
-     * if the appropriate database tables are defined for the repository. 
-     * 
-     * @param sqlFile The SQL script file to be executed.  
-     * @param expectSuccess Indicates whether this method should expect that 
-     *      probing for the database will be successful. For instance, after 
-     *      deleting the database, the probe should fail. 
-     *      
-     * @return <code>true</code> if the script was executed and the probe 
-     *      returned the expected results, <code>false</code> otherwise. 
-     * @throws IOException On failure due to IO problems (e.g., could not 
-     *      read the script file.
-     * @throws SQLException On failure due to database access problems.
-     */
-    private boolean executeScriptAndProbe(File sqlFile, boolean expectSuccess) 
-            throws RepositoryAccessException {
-        
-        boolean success = false;
-        if (!sqlFile.canRead() || !sqlFile.isFile()) {
-            throw new RepositoryAccessException("Could not locate script file. " +
-                    "The file I tried (" + sqlFile.getAbsolutePath() + ") " +
-            "either does not exist or cannot be read.");
-        }
-        
-        try {
-            m_provider.executeScript(sqlFile);
-            success = (expectSuccess) ? probe() : !probe();
-        } catch(Exception ex) {
-            throw new RepositoryAccessException(ex);
-        }
-        
-        return success;
-    }
-
     /**
      * Attempts to determine whether or not the proper tables are defined for 
      * use by the <code>PropertyRepository</code>. 
@@ -130,72 +65,21 @@ public final class MySQLPropertyRepository extends PropertyRepository {
      *      <code>false</code> if they are not.
      */
     public boolean probe() {
-        // we'll code these in here since these represent the tables and fields
-        // that this particular repository implementation expects to be present.
-        String sqlProbePropertyTypes = 
-            "SELECT type_id, css, name, description, format, config " +
-            "  FROM PropertyTypes;";
-        String sqlProbePropertyGroups = 
-            "SELECT group_id, parent_group, group_type " +
-            "  FROM PropertyGroups";
-        String sqlProbeVisualProperties = 
-            "SELECT vprop_id, group_id, type_id, prop_value, enabled " +
-            "  FROM VisualProperties";
-        String sqlProbePropertyConfigs = 
-            "SELECT vprop_id, prop_value, enabled, units, minimum, " +
+        List<String> sql = new ArrayList<String>(3);
+        sql.add("SELECT type_id, css, name, description, format, config " +
+            "  FROM PropertyTypes");
+        sql.add("SELECT group_id, parent_group, group_type " +
+            "  FROM PropertyGroups");
+        sql.add("SELECT vprop_id, group_id, type_id, prop_value, enabled " +
+            "  FROM VisualProperties");
+        sql.add("SELECT vprop_id, prop_value, enabled, units, minimum, " +
             "       maximum, on_value, off_value, options_only, regex, regext " +
-            "  FROM PropertyConfigurations";  
-        String sqlProbeConfigOptions = 
-            "SELECT vprop_id, option_value " +
-            "  FROM ConfigurationOptions";
+            "  FROM PropertyConfigurations");  
+        sql.add("SELECT vprop_id, option_value " +
+            "  FROM ConfigurationOptions");
         
-        boolean success = false;
-        
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = m_provider.getConnection();
-            stmt = conn.createStatement();
-            stmt.executeQuery(sqlProbePropertyTypes);
-            stmt.executeQuery(sqlProbePropertyGroups);
-            stmt.executeQuery(sqlProbeVisualProperties);
-            stmt.executeQuery(sqlProbePropertyConfigs);
-            stmt.executeQuery(sqlProbeConfigOptions);
-            success = true;
-            
-        } catch (Exception ex) {
-            // not unexpected - we may test under scenarios when the database
-            // doesn't exist. 
-            
-            // XXX Implment these tests by querying for database metadata 
-            success = false;
-        } finally {
-            if (conn != null) {
-                try { conn.close(); }
-                catch (Exception ex) { 
-                    /* complain loudly. leaked resources are bad. */
-                    assert false : "Failed to close database connection";
-                    throw new RuntimeException("Failed to close database connection");
-                }
-            }
-        }
+        return probe(sql);
        
-        return success;
-    }
-    
-    /**
-     * Create the database tables required for the MySQL PropertyRepository,
-     * silently deleting any existing tables or data. Use with caution. 
-     * <code>probe</code> should return true after successfull completion of 
-     * this method. 
-     * 
-     * @return <code>true</code> if the database was created succesfully, 
-     *      <code>false</code> if it was not.
-     * @throws RepositoryAccessException On database access errors.
-     */
-    public boolean create() throws RepositoryAccessException {
-        File sqlFile = new File(m_sqlDirectory, "vprops.sql");
-        return executeScriptAndProbe(sqlFile, true);
     }
     
     /** 
@@ -205,6 +89,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
      * @throws RepositoryAccessException
      */
     public boolean initTypes() throws RepositoryAccessException {
+        // XXX Magic String
         File sqlFile = new File(m_sqlDirectory, "types.sql");
         if (!sqlFile.exists() || !sqlFile.canRead() || !sqlFile.isFile())
             return false;
@@ -212,72 +97,9 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         return executeScriptAndProbe(sqlFile, true);
     }
     
-    /**
-     * Deletes all data (but not the database tables) from the database. 
-     * <code>probe</code> should return true after successfull completion of 
-     * this method. 
-     * 
-     * @return <code>true</code> if the database was cleaned succesfully, 
-     *      <code>false</code> if it was not.
-     * @throws RepositoryAccessException On database access errors.
-     */
-    public boolean clean() throws RepositoryAccessException {
-        File sqlFile = new File(m_sqlDirectory, "clean.sql");
-        return executeScriptAndProbe(sqlFile, true);
-    }
-    
-    /**
-     * Drops all database tables and data associated with this 
-     * PropertyRepsoitory. <code>probe</code> should return false after 
-     * successfull completion of this method. 
-     * 
-     * @return <code>true</code> if the database was deleted succesfully, 
-     *      <code>false</code> if it was not.
-     * @throws RepositoryAccessException On database access errors.
-     */
-    public boolean drop() throws RepositoryAccessException {
-        File sqlFile = new File(m_sqlDirectory, "drop.sql");
-        return executeScriptAndProbe(sqlFile, false);
-    }
-    
     //========================================================================
     // PROPERTY TYPE METHODS
     //========================================================================
-    
-    /**
-     * Helper method that attempts to rollback a transaction, logging and 
-     * supressing any exceptions.
-     *  
-     * @param conn the connection to rollback
-     */
-    private void rollback(Connection conn) {
-        String msg = "Could not rollback transaction.";
-        try {
-            conn.rollback();
-        } catch (SQLException sqe) {
-            LogService.logError(msg, LOGGER, sqe );
-            
-            throw new RuntimeException(sqe);
-        }
-    }
-    
-    /**
-     * Helper method that attempts to close a transaction, logging and 
-     * supressing any exceptions.
-     *  
-     * @param conn the connection to close
-     */
-    private void close(Connection conn) {
-        String msg = "Could not close connection.";
-        try { 
-            if (conn != null)
-                conn.close();
-        } catch (SQLException sqe) {
-            LogService.logError(msg, LOGGER, sqe);
-            
-            throw new RuntimeException(sqe);
-        }
-    }
     
     /**
      * 
@@ -309,9 +131,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         boolean success = false;
         
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             synchronized (m_propTypeCache) {
                 PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                 if (proxy.create(type)) { 
@@ -345,9 +165,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openReadOnly();
             synchronized (m_propTypeCache) {
                 PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                 types = proxy.listAll();
@@ -397,8 +215,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
                 
                 type = m_propTypeCache.get(id);
                 if (type == null || bypassCache) {  
-                    conn = m_provider.getConnection();
-                    conn.setReadOnly(true);
+                    conn = openReadOnly();
                     PropertyTypeProxy proxy = new PropertyTypeProxy(conn);
                     type = proxy.restore(id);
                     
@@ -449,8 +266,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         VisualProperty vprop = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
+            conn = openTransaction();
             
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             vprop = proxy.create(type, defaults, value, enabled);
@@ -470,8 +286,9 @@ public final class MySQLPropertyRepository extends PropertyRepository {
     }
     
     /**
+     * Updates the database record for the provided property.
      * 
-     * @param prop
+     * @param prop The property to update.
      * @return
      * @throws RepositoryAccessException
      */
@@ -480,9 +297,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         boolean success = false;
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             success = proxy.update(prop);
             conn.commit();
@@ -499,6 +314,8 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         
         return success;
     }
+    
+    
     
     /**
      * 
@@ -524,9 +341,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Connection conn = null;
         VisualProperty vprop = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openTransaction();
             VisualPropertyProxy proxy = new VisualPropertyProxy(conn);
             vprop = proxy.restore(id);
         } catch (Exception ex) {
@@ -549,9 +364,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
     public Group createGroup(Group group) throws RepositoryAccessException {
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setAutoCommit(false);
-            
+            conn = openTransaction();
             GroupProxy proxy = new GroupProxy(conn);
             proxy.createGroup(group);
             conn.commit();
@@ -572,9 +385,7 @@ public final class MySQLPropertyRepository extends PropertyRepository {
         Group group = null;
         Connection conn = null;
         try {
-            conn = m_provider.getConnection();
-            conn.setReadOnly(true);
-            
+            conn = openTransaction();
             GroupProxy proxy = new GroupProxy(conn);
             Map<String, Object> data = proxy.restoreGroup(id);
             group = new Group(data);

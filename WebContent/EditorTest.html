@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HTML Editor Test Page</title>
+
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/skin.css">
+<!-- Utility Dependencies -->
+<script src="http://yui.yahooapis.com/2.8.2r1/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+<script src="http://yui.yahooapis.com/2.8.2r1/build/element/element-debug.js"></script> 
+
+<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+<script src="http://yui.yahooapis.com/2.8.2r1/build/container/container_core-debug.js"></script>
+<script src="http://yui.yahooapis.com/2.8.2r1/build/menu/menu-debug.js"></script>
+<script src="http://yui.yahooapis.com/2.8.2r1/build/button/button-debug.js"></script>
+<script src="http://yui.yahooapis.com/2.8.2r1/build/selector/selector-debug.js"></script>
+
+<!-- Source file for Rich Text Editor-->
+<script src="http://yui.yahooapis.com/2.8.2r1/build/editor/editor-debug.js"></script>
+
+<script src="/js/IDCH/idch.js"></script>
+<script src="/js/IDCH/utils/KeyMap.js"></script>
+<script src="/js/IDCH/nt/TCEditor.js"></script>
+
+<style>
+  .yui-toolbar-group-textstyle h3 { display : none; } 
+  .yui-toolbar-container { padding-top:5px; } 
+  .yui-toolbar-titlebar { display:none; }
+  
+  form.editvariant-window {
+    height:100px; 
+  }
+  
+  form.editvariant-window .buttons {
+    position:absolute;
+    top:75px; left:230px;
+  }
+  
+</style>
+
+<script>
+YAHOO.util.Event.addListener(window, "load", function() {
+  var kmap = new IDCH.utils.KeyMap(IDCH.utils.KeyMap.GK_MAP),
+      editor = new IDCH.nt.TCEditor('msgpost',  {
+          height  : '600px',
+          width   : '800px',
+          dompath : true, // Turns on the bar at the bottom
+          animate : true, // Animates the opening, closing and moving of Editor windows
+          kmap    : kmap
+      });
+      
+  editor.render();
+});
+  
+
+
+</script>
+</head>
+
+<body class="yui-skin-sam">
+<textarea name="msgpost" id="msgpost" cols="50" rows="10">
+
+<h2>ΚΑΤΑ ΛΟΥΚΑΝ</h2>
+<div class="book">
+
+  <div class="chapter" id="Luke.1" >
+  <h3>Chapter 1</h3>
+	  
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="1">Ἐπειδήπερ πολλοὶ ἐπεχείρησαν ἀνατάξασθαι διήγησιν περὶ τῶν πεπληροφορημένων ἐν ἡμῖν πραγμάτων,</span>  
+	<span class="verse" id="2">καθὼς παρέδοσαν ἡμῖν οἱ ἀπ&rsquo; ἀρχῆς αὐτόπται καὶ ὑπηρέται γενόμενοι τοῦ λόγου,</span>  
+	<span class="verse" id="3">ἔδοξε κἀμοὶ παρηκολουθηκότι ἄνωθεν πᾶσιν ἀκριβῶς καθεξῆς σοι γράψαι,  κράτιστε Θεόφιλε,</span>  
+	<span class="verse" id="4">ἵνα ἐπιγνῷς περὶ ὧν κατηχήθης λόγων τὴν ἀσφάλειαν.</span>  
+	
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="5">Ἐγένετο ἐν ταῖς ἡμέραις Ἡρῴδου βασιλέως τῆς Ἰουδαίας ἱερεύς τις ὀνόματι Ζαχαρίας ἐξ ἐφημερίας Ἀβιά,  καὶ γυνὴ αὐτῷ ἐκ τῶν θυγατέρων Ἀαρών,  καὶ τὸ ὄνομα αὐτῆς Ἐλισάβετ.</span>  
+	<span class="verse" id="6">ἦσαν δὲ δίκαιοι ἀμφότεροι ἐναντίον τοῦ θεοῦ,  πορευόμενοι ἐν πάσαις ταῖς ἐντολαῖς καὶ δικαιώμασιν τοῦ κυρίου ἄμεμπτοι.</span>  
+	<span class="verse" id="7">καὶ οὐκ ἦν αὐτοῖς τέκνον,  καθότι ἦν ἡ Ἐλισάβετ⸃  στεῖρα,  καὶ ἀμφότεροι προβεβηκότες ἐν ταῖς ἡμέραις αὐτῶν ἦσαν.</span>  
+	
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="8">Ἐγένετο δὲ ἐν τῷ ἱερατεύειν αὐτὸν ἐν τῇ τάξει τῆς ἐφημερίας αὐτοῦ ἔναντι τοῦ θεοῦ</span> 
+	<span class="verse" id="9">κατὰ τὸ ἔθος τῆς ἱερατείας ἔλαχε τοῦ θυμιᾶσαι εἰσελθὼν εἰς τὸν ναὸν τοῦ κυρίου,</span>  
+	<span class="verse" id="10">καὶ πᾶν τὸ πλῆθος ἦν τοῦ λαοῦ προσευχόμενον ἔξω τῇ ὥρᾳ τοῦ θυμιάματος&middot;</span>
+	<span class="verse" id="11">ὤφθη δὲ αὐτῷ ἄγγελος κυρίου ἑστὼς ἐκ δεξιῶν τοῦ θυσιαστηρίου τοῦ θυμιάματος.</span>  
+	<span class="verse" id="12">καὶ ἐταράχθη Ζαχαρίας ἰδών,  καὶ φόβος ἐπέπεσεν ἐπ&rsquo; αὐτόν.</span>
+	<span class="verse" id="13">εἶπεν δὲ πρὸς αὐτὸν ὁ ἄγγελος&middot;  Μὴ φοβοῦ,  Ζαχαρία,  διότι εἰσηκούσθη ἡ δέησίς σου,  καὶ ἡ γυνή σου Ἐλισάβετ γεννήσει υἱόν σοι,  καὶ καλέσεις τὸ ὄνομα αὐτοῦ Ἰωάννην&middot;</span>  
+	<span class="verse" id="14">καὶ ἔσται χαρά σοι καὶ ἀγαλλίασις,  καὶ πολλοὶ ἐπὶ τῇ γενέσει αὐτοῦ χαρήσονται&middot;</span>
+	<span class="verse" id="15">ἔσται γὰρ μέγας ἐνώπιον τοῦ κυρίου,  καὶ οἶνον καὶ σίκερα οὐ μὴ πίῃ,  καὶ πνεύματος ἁγίου πλησθήσεται ἔτι ἐκ κοιλίας μητρὸς αὐτοῦ,</span>  
+	<span class="verse" id="16">καὶ πολλοὺς τῶν υἱῶν Ἰσραὴλ ἐπιστρέψει ἐπὶ κύριον τὸν θεὸν αὐτῶν&middot;</span>
+	<span class="verse" id="17">καὶ αὐτὸς προελεύσεται ἐνώπιον αὐτοῦ ἐν πνεύματι καὶ δυνάμει Ἠλίου,  ἐπιστρέψαι καρδίας πατέρων ἐπὶ τέκνα καὶ ἀπειθεῖς ἐν φρονήσει δικαίων,  ἑτοιμάσαι κυρίῳ λαὸν κατεσκευασμένον.</span>  
+	<span class="verse" id="18">καὶ εἶπεν Ζαχαρίας πρὸς τὸν ἄγγελον&middot;  Κατὰ τί γνώσομαι τοῦτο;  ἐγὼ γάρ εἰμι πρεσβύτης καὶ ἡ γυνή μου προβεβηκυῖα ἐν ταῖς ἡμέραις αὐτῆς.</span>
+	<span class="verse" id="19">καὶ ἀποκριθεὶς ὁ ἄγγελος εἶπεν αὐτῷ&middot;  Ἐγώ εἰμι Γαβριὴλ ὁ παρεστηκὼς ἐνώπιον τοῦ θεοῦ,  καὶ ἀπεστάλην λαλῆσαι πρὸς σὲ καὶ εὐαγγελίσασθαί σοι ταῦτα&middot;</span>
+	<span class="verse" id="20">καὶ ἰδοὺ ἔσῃ σιωπῶν καὶ μὴ δυνάμενος λαλῆσαι ἄχρι ἧς ἡμέρας γένηται ταῦτα,  ἀνθ&rsquo; ὧν οὐκ ἐπίστευσας τοῖς λόγοις μου,  οἵτινες πληρωθήσονται εἰς τὸν καιρὸν αὐτῶν.</span>  
+	
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="21">Καὶ ἦν ὁ λαὸς προσδοκῶν τὸν Ζαχαρίαν,  καὶ ἐθαύμαζον ἐν τῷ χρονίζειν ἐν τῷ ναῷ αὐτόν⸃.</span>  
+	<span class="verse" id="22">ἐξελθὼν δὲ οὐκ ἐδύνατο λαλῆσαι αὐτοῖς,  καὶ ἐπέγνωσαν ὅτι ὀπτασίαν ἑώρακεν ἐν τῷ ναῷ&middot;  καὶ αὐτὸς ἦν διανεύων αὐτοῖς,  καὶ διέμενεν κωφός.</span>  
+	<span class="verse" id="23">καὶ ἐγένετο ὡς ἐπλήσθησαν αἱ ἡμέραι τῆς λειτουργίας αὐτοῦ,  ἀπῆλθεν εἰς τὸν οἶκον αὐτοῦ.</span>
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="24">Μετὰ δὲ ταύτας τὰς ἡμέρας συνέλαβεν Ἐλισάβετ ἡ γυνὴ αὐτοῦ&middot;  καὶ περιέκρυβεν ἑαυτὴν μῆνας πέντε,  λέγουσα</span> 
+	<span class="verse" id="25">ὅτι Οὕτως μοι πεποίηκεν κύριος ἐν ἡμέραις αἷς ἐπεῖδεν ἀφελεῖν ὄνειδός μου ἐν ἀνθρώποις.</span>
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="26">Ἐν δὲ τῷ μηνὶ τῷ ἕκτῳ ἀπεστάλη ὁ ἄγγελος Γαβριὴλ ἀπὸ τοῦ θεοῦ εἰς πόλιν τῆς Γαλιλαίας ᾗ ὄνομα Ναζαρὲθ</span>
+	<span class="verse" id="27">πρὸς παρθένον ἐμνηστευμένην ἀνδρὶ ᾧ ὄνομα Ἰωσὴφ ἐξ οἴκου Δαυὶδ,  καὶ τὸ ὄνομα τῆς παρθένου Μαριάμ.</span>  
+	<span class="verse" id="28">καὶ εἰσελθὼν πρὸς αὐτὴν εἶπεν&middot;  Χαῖρε,  κεχαριτωμένη,  ὁ κύριος μετὰ σοῦ.</span>  
+	<span class="verse" id="29">ἡ δὲ ἐπὶ τῷ λόγῳ διεταράχθη⸃  καὶ διελογίζετο ποταπὸς εἴη ὁ ἀσπασμὸς οὗτος.</span>  
+	<span class="verse" id="30">καὶ εἶπεν ὁ ἄγγελος αὐτῇ&middot;  Μὴ φοβοῦ,  Μαριάμ,  εὗρες γὰρ χάριν παρὰ τῷ θεῷ&middot;</span>  
+	<span class="verse" id="31">καὶ ἰδοὺ συλλήμψῃ ἐν γαστρὶ καὶ τέξῃ υἱόν,  καὶ καλέσεις τὸ ὄνομα αὐτοῦ Ἰησοῦν.</span>  
+	<span class="verse" id="32">οὗτος ἔσται μέγας καὶ υἱὸς Ὑψίστου κληθήσεται,  καὶ δώσει αὐτῷ κύριος ὁ θεὸς τὸν θρόνον Δαυὶδ τοῦ πατρὸς αὐτοῦ,</span>  
+	<span class="verse" id="33">καὶ βασιλεύσει ἐπὶ τὸν οἶκον Ἰακὼβ εἰς τοὺς αἰῶνας,  καὶ τῆς βασιλείας αὐτοῦ οὐκ ἔσται τέλος.</span>  
+	<span class="verse" id="34">εἶπεν δὲ Μαριὰμ πρὸς τὸν ἄγγελον&middot;  Πῶς ἔσται τοῦτο,  ἐπεὶ ἄνδρα οὐ γινώσκω;</span>  
+	<span class="verse" id="35">καὶ ἀποκριθεὶς ὁ ἄγγελος εἶπεν αὐτῇ&middot;  Πνεῦμα ἅγιον ἐπελεύσεται ἐπὶ σέ,  καὶ δύναμις Ὑψίστου ἐπισκιάσει σοι&middot;  διὸ καὶ τὸ γεννώμενον ἅγιον κληθήσεται,  υἱὸς θεοῦ&middot;</span>  
+	<span class="verse" id="36">καὶ ἰδοὺ Ἐλισάβετ ἡ συγγενίς σου καὶ αὐτὴ συνείληφεν υἱὸν ἐν γήρει αὐτῆς,  καὶ οὗτος μὴν ἕκτος ἐστὶν αὐτῇ τῇ καλουμένῃ στείρᾳ&middot;</span>  
+	<span class="verse" id="37">ὅτι οὐκ ἀδυνατήσει παρὰ τοῦ θεοῦ⸃  πᾶν ῥῆμα.</span>  
+	<span class="verse" id="38">εἶπεν δὲ Μαριάμ&middot;  Ἰδοὺ ἡ δούλη κυρίου&middot;  γένοιτό μοι κατὰ τὸ ῥῆμά σου.  καὶ ἀπῆλθεν ἀπ&rsquo; αὐτῆς ὁ ἄγγελος.</span>
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="39">Ἀναστᾶσα δὲ Μαριὰμ ἐν ταῖς ἡμέραις ταύταις ἐπορεύθη εἰς τὴν ὀρεινὴν μετὰ σπουδῆς εἰς πόλιν Ἰούδα,</span>  
+	<span class="verse" id="40">καὶ εἰσῆλθεν εἰς τὸν οἶκον Ζαχαρίου καὶ ἠσπάσατο τὴν Ἐλισάβετ.</span>  
+	<span class="verse" id="41">καὶ ἐγένετο ὡς ἤκουσεν τὸν ἀσπασμὸν τῆς Μαρίας ἡ Ἐλισάβετ⸃,  ἐσκίρτησεν τὸ βρέφος ἐν τῇ κοιλίᾳ αὐτῆς,  καὶ ἐπλήσθη πνεύματος ἁγίου ἡ Ἐλισάβετ,</span>  
+	<span class="verse" id="42">καὶ ἀνεφώνησεν κραυγῇ μεγάλῃ καὶ εἶπεν&middot;  Εὐλογημένη σὺ ἐν γυναιξίν,  καὶ εὐλογημένος ὁ καρπὸς τῆς κοιλίας σου.</span>  
+	<span class="verse" id="43">καὶ πόθεν μοι τοῦτο ἵνα ἔλθῃ ἡ μήτηρ τοῦ κυρίου μου πρὸς ἐμέ;</span>  
+	<span class="verse" id="44">ἰδοὺ γὰρ ὡς ἐγένετο ἡ φωνὴ τοῦ ἀσπασμοῦ σου εἰς τὰ ὦτά μου,  ἐσκίρτησεν ἐν ἀγαλλιάσει τὸ βρέφος⸃  ἐν τῇ κοιλίᾳ μου.</span>  
+	<span class="verse" id="45">καὶ μακαρία ἡ πιστεύσασα ὅτι ἔσται τελείωσις τοῖς λελαλημένοις αὐτῇ παρὰ κυρίου.</span>
+	
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="46">Καὶ εἶπεν Μαριάμ&middot;  Μεγαλύνει ἡ ψυχή μου τὸν κύριον,</span>  
+	<span class="verse" id="47">καὶ ἠγαλλίασεν τὸ πνεῦμά μου ἐπὶ τῷ θεῷ τῷ σωτῆρί μου&middot;</span>  
+	<span class="verse" id="48">ὅτι ἐπέβλεψεν ἐπὶ τὴν ταπείνωσιν τῆς δούλης αὐτοῦ,  ἰδοὺ γὰρ ἀπὸ τοῦ νῦν μακαριοῦσίν με πᾶσαι αἱ γενεαί&middot;</span>  
+	<span class="verse" id="49">ὅτι ἐποίησέν μοι μεγάλα ὁ δυνατός,  καὶ ἅγιον τὸ ὄνομα αὐτοῦ,</span>  
+	<span class="verse" id="50">καὶ τὸ ἔλεος αὐτοῦ εἰς γενεὰς καὶ γενεὰς⸃  τοῖς φοβουμένοις αὐτόν.</span>  
+	<span class="verse" id="51">Ἐποίησεν κράτος ἐν βραχίονι αὐτοῦ,  διεσκόρπισεν ὑπερηφάνους διανοίᾳ καρδίας αὐτῶν&middot;</span>  
+	<span class="verse" id="52">καθεῖλεν δυνάστας ἀπὸ θρόνων καὶ ὕψωσεν ταπεινούς,</span>  
+	<span class="verse" id="53">πεινῶντας ἐνέπλησεν ἀγαθῶν καὶ πλουτοῦντας ἐξαπέστειλεν κενούς.</span>  
+	<span class="verse" id="54">ἀντελάβετο Ἰσραὴλ παιδὸς αὐτοῦ,  μνησθῆναι ἐλέους,</span>  
+	<span class="verse" id="55">καθὼς ἐλάλησεν πρὸς τοὺς πατέρας ἡμῶν,  τῷ Ἀβραὰμ καὶ τῷ σπέρματι αὐτοῦ εἰς τὸν αἰῶνα.</span>  
+	<span class="verse" id="56">Ἔμεινεν δὲ Μαριὰμ σὺν αὐτῇ ὡς μῆνας τρεῖς,  καὶ ὑπέστρεψεν εἰς τὸν οἶκον αὐτῆς.</span>
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="57">Τῇ δὲ Ἐλισάβετ ἐπλήσθη ὁ χρόνος τοῦ τεκεῖν αὐτήν,  καὶ ἐγέννησεν υἱόν.</span>
+	<span class="verse" id="58">καὶ ἤκουσαν οἱ περίοικοι καὶ οἱ συγγενεῖς αὐτῆς ὅτι ἐμεγάλυνεν κύριος τὸ ἔλεος αὐτοῦ μετ&rsquo; αὐτῆς,  καὶ συνέχαιρον αὐτῇ.</span>
+	<span class="verse" id="59">Καὶ ἐγένετο ἐν τῇ ἡμέρᾳ τῇ ὀγδόῃ⸃  ἦλθον περιτεμεῖν τὸ παιδίον,  καὶ ἐκάλουν αὐτὸ ἐπὶ τῷ ὀνόματι τοῦ πατρὸς αὐτοῦ Ζαχαρίαν.</span>  
+	<span class="verse" id="60">καὶ ἀποκριθεῖσα ἡ μήτηρ αὐτοῦ εἶπεν&middot;  Οὐχί,  ἀλλὰ κληθήσεται Ἰωάννης.</span>
+	<span class="verse" id="61">καὶ εἶπαν πρὸς αὐτὴν ὅτι Οὐδείς ἐστιν ἐκ τῆς συγγενείας⸃  σου ὃς καλεῖται τῷ ὀνόματι τούτῳ.</span>  
+	<span class="verse" id="62">ἐνένευον δὲ τῷ πατρὶ αὐτοῦ τὸ τί ἂν θέλοι καλεῖσθαι αὐτό.</span>  
+	<span class="verse" id="63">καὶ αἰτήσας πινακίδιον ἔγραψεν λέγων&middot;  Ἰωάννης ἐστὶν ὄνομα αὐτοῦ.  καὶ ἐθαύμασαν πάντες.</span>  
+	<span class="verse" id="64">ἀνεῴχθη δὲ τὸ στόμα αὐτοῦ παραχρῆμα καὶ ἡ γλῶσσα αὐτοῦ,  καὶ ἐλάλει εὐλογῶν τὸν θεόν.</span>  
+	<span class="verse" id="65">καὶ ἐγένετο ἐπὶ πάντας φόβος τοὺς περιοικοῦντας αὐτούς,  καὶ ἐν ὅλῃ τῇ ὀρεινῇ τῆς Ἰουδαίας διελαλεῖτο πάντα τὰ ῥήματα ταῦτα,</span>  
+	<span class="verse" id="66">καὶ ἔθεντο πάντες οἱ ἀκούσαντες ἐν τῇ καρδίᾳ αὐτῶν,  λέγοντες&middot;  Τί ἄρα τὸ παιδίον τοῦτο ἔσται;  καὶ γὰρ χεὶρ κυρίου ἦν μετ&rsquo; αὐτοῦ.</span>  
+	
+	<div class="paragraph">&nbsp;</div>
+	<span class="verse" id="67">Καὶ Ζαχαρίας ὁ πατὴρ αὐτοῦ ἐπλήσθη πνεύματος ἁγίου καὶ ἐπροφήτευσεν λέγων&middot;</span>  
+	<span class="verse" id="68">Εὐλογητὸς κύριος ὁ θεὸς τοῦ Ἰσραήλ,  ὅτι ἐπεσκέψατο καὶ ἐποίησεν λύτρωσιν τῷ λαῷ αὐτοῦ,</span>  
+	<span class="verse" id="69">καὶ ἤγειρεν κέρας σωτηρίας ἡμῖν ἐν οἴκῳ Δαυὶδ παιδὸς αὐτοῦ,</span>  
+	<span class="verse" id="70">καθὼς ἐλάλησεν διὰ στόματος τῶν ἁγίων ἀπ&rsquo; αἰῶνος προφητῶν αὐτοῦ,</span>  
+	<span class="verse" id="71">σωτηρίαν ἐξ ἐχθρῶν ἡμῶν καὶ ἐκ χειρὸς πάντων τῶν μισούντων ἡμᾶς,</span>  
+	<span class="verse" id="72">ποιῆσαι ἔλεος μετὰ τῶν πατέρων ἡμῶν καὶ μνησθῆναι διαθήκης ἁγίας αὐτοῦ,</span>  
+	<span class="verse" id="73">ὅρκον ὃν ὤμοσεν πρὸς Ἀβραὰμ τὸν πατέρα ἡμῶν,  τοῦ δοῦναι ἡμῖν</span> 
+	<span class="verse" id="74">ἀφόβως ἐκ χειρὸς ἐχθρῶν ῥυσθέντας λατρεύειν αὐτῷ</span> 
+	<span class="verse" id="75">ἐν ὁσιότητι καὶ δικαιοσύνῃ ἐνώπιον αὐτοῦ πάσαις ταῖς ἡμέραις⸃  ἡμῶν.</span>  
+	<span class="verse" id="76">καὶ σὺ δέ,  παιδίον,  προφήτης Ὑψίστου κληθήσῃ,  προπορεύσῃ γὰρ ἐνώπιον κυρίου ἑτοιμάσαι ὁδοὺς αὐτοῦ,</span>  
+	<span class="verse" id="77">τοῦ δοῦναι γνῶσιν σωτηρίας τῷ λαῷ αὐτοῦ ἐν ἀφέσει ἁμαρτιῶν αὐτῶν,</span>  
+	<span class="verse" id="78">διὰ σπλάγχνα ἐλέους θεοῦ ἡμῶν,  ἐν οἷς ἐπισκέψεται ἡμᾶς ἀνατολὴ ἐξ ὕψους,</span>  
+	<span class="verse" id="79">ἐπιφᾶναι τοῖς ἐν σκότει καὶ σκιᾷ θανάτου καθημένοις,  τοῦ κατευθῦναι τοὺς πόδας ἡμῶν εἰς ὁδὸν εἰρήνης.</span>
+    
+	<div class="paragraph">&nbsp;</div>
+    <span class="verse" id="80">Τὸ δὲ παιδίον ηὔξανε καὶ ἐκραταιοῦτο πνεύματι,  καὶ ἦν ἐν ταῖς ἐρήμοις ἕως ἡμέρας ἀναδείξεως αὐτοῦ πρὸς τὸν Ἰσραήλ.</span>
+	
+  </div>
+</div>
+
+</textarea>
+</body>
+ 
+</html>

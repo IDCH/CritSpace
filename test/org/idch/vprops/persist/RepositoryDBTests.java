@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import org.idch.persist.ConnectionProvider;
+import org.idch.persist.DBBackedRepository;
 
 import junit.framework.TestCase;
 
@@ -28,20 +29,22 @@ import junit.framework.TestCase;
  * @author Neal Audenaert
  */
 public class RepositoryDBTests extends TestCase {
-    private static final String PROP_BUNDLE = "test";
+    private static final String PROP_BUNDLE = "test_repo";
     
     private PropertyRepository m_repository = null;
     private ConnectionProvider m_provider = null;
     
     public void setUp() throws Exception {
-        ResourceBundle bundle = ResourceBundle.getBundle(PROP_BUNDLE);
-        m_repository = PropertyRepository.get(bundle);
+        DBBackedRepository.setPropertyBundle(PROP_BUNDLE);
+        m_repository = PropertyRepository.get();
         
         // get our own connection provider to probe the database.
-        String url = bundle.getString(PropertyRepository.DB_URL_PROP);
-        String driver = bundle.getString(PropertyRepository.DB_DRIVER_PROP);
-        String user = bundle.getString(PropertyRepository.DB_USER_PROP);
-        String pass = bundle.getString(PropertyRepository.DB_PASS_PROP);
+        ResourceBundle bundle = ResourceBundle.getBundle(PROP_BUNDLE);
+        
+        String url = bundle.getString(DBBackedRepository.DB_URL_PROP);
+        String driver = bundle.getString(DBBackedRepository.DB_DRIVER_PROP);
+        String user = bundle.getString(DBBackedRepository.DB_USER_PROP);
+        String pass = bundle.getString(DBBackedRepository.DB_PASS_PROP);
         
         m_provider = new ConnectionProvider(url, driver, user, pass);
     }

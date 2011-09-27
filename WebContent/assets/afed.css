@@ -1,0 +1,548 @@
+/**
+ *  Title: afed.css
+ *  Version: 0.02 (alpha)
+ *  Author: Neal Audenaert (neal@idch.org)
+ *  Copyright (2010) Institute for Digital Christian Heritage
+ *      All Rights Reserved
+ */
+ 
+/* Background for the page. */ 
+html { background-color : #A0ADD6; }
+
+/* *************************** *
+ * TOP MENU BAR                *
+ * *************************** */
+#menu {
+  opacity          : 1.0;
+  border-bottom    : 2px outset #000;
+  background-color : #EBDCB0;
+  width:100%;
+  height:22px;
+
+  position : fixed;
+  top      : 0px;
+  left     : 0px;
+
+  padding-left:10px;
+  z-index:5
+}
+
+#menu .title {
+  float         : right;
+  padding-right : 25px;
+  margin-top    : 3px;
+  
+  color         : #8C3D33;
+  font-family   : Arial, sans-serif;
+  font-size     : 16px;
+  font-weight   : bold;
+  text-align    : right;
+}
+
+#menu .item {
+  color       : #333;
+  font-family : Verdana, sans-serif;
+  font-size   : 12px;
+  opacity     : 0.7;
+  cursor      : pointer;
+  
+  margin-top:3px;
+  margin-right:5px;
+  padding:3px;
+  padding-top:2px;
+  padding-bottom:4px;
+  float:left;
+  height:12px;
+  border:1px solid #333;
+  border-bottom:2px outset #000;
+  background-color:#C3CAE0;
+}
+
+/* ***************************** *
+ * MAIN PAGE CONTENT AREA        *
+ * ***************************** */
+
+/* Main content area on the page. */
+#afed-imagedisp {
+  background-color : #B7BED7;
+  border           : 1px solid #666;
+  
+  position   : absolute;
+  top        : 230px;
+  left       : 400px;
+  
+  width      : 840px;
+  height     : 645px;
+  text-align : left;
+}      
+
+/** Tab to select different content for the main display area. */
+#afed-imagedisp .tab {
+  /* font */
+  color       : #666;
+  font-family : Verdana, sans-serif;
+  font-weight : bold;
+  font-size   : 12px;
+  text-align  : center;
+  opacity     : 1;
+  
+  /* color */
+  background-color : #C3CAE0;
+  border           : 1px solid #666;
+  
+  /* position */
+  float     : left;
+  position  : relative;
+  top       : -19px;
+  z-index   : 1;
+
+  /* dimensions */
+  margin      : 0px;
+  margin-left : 5px;
+  padding     : 3px;
+  padding-top : 2px;
+  min-width   : 60px;
+  height      : 12px;
+}
+
+/** The selected tab (i.e. currently visible content) */
+#afed-imagedisp .selected-tab {
+  color            : #000;
+  font-weight      : bold;
+  background-color : #EBDCB0;
+  border-bottom    : 1px solid #EBDCB0; /* erase the bottom border. */
+}
+
+/** Toolbar region of the main display area. */
+#afed-imagedisp-menu {
+  background-color : #EBDCB0;
+  width:100%;
+  height:25px;
+  border-bottom:1px solid #666; 
+  margin-bottom:10px;
+  z-index : 5;
+}
+
+
+/* ***************************** *
+ * TZIVI VIEWPORT ELEMENTS       *
+ * ***************************** */
+    /*                *
+     *  Zoom Control  *
+     *                */ 
+
+/* Set base width */
+.pvz, .pvzsbg, pvzi, .pvzo, .pvzsm 
+  { margin:0; padding:0; width : 30px; }
+
+/* Main container element */
+.pvz { height:230px; margin-left:5px; position:absolute; top:33px; }
+
+/* Slider */
+.pvzs   { }
+
+/* Background */
+.pvzsbg { height:170px; background:url('bg-v.gif') 0px -10px repeat-y; }
+
+/* Slider bar */
+.pvzsb  { padding-left:3px; width:18px; height:18px;}
+.pvzsb img { padding:0px; margin:0px; }
+
+/* Zoom in/out buttons */
+.pvzi, .pvzo { margin:3px; height:9px; cursor:pointer;}
+.pvzi   { background:url('zoomin.gif')  4px 0px no-repeat; }    
+.pvzo   { background:url('zoomout.gif') 4px 0px no-repeat; }  
+
+/* Message */
+.pvzsm  { 
+  width:35px;
+  margin-left:-3px;
+  text-align:right;
+  height:20px; 
+  font-family:Verdana, serif; 
+  font-size:.7em; 
+}
+  
+#afed-imagedisp-v {
+  position : absolute; 
+  left : 40px;
+  top  : 36px;
+  border : 1px solid black;
+  z-index : 1;
+}
+
+#afed-imagedisp-v .viewport {
+  overflow:hidden;
+}
+
+.viewport .layer .marker {
+  position:absolute;
+  background-color:blue;
+  opacity:.75;
+  width:5px;
+  height:5px;
+  cursor:pointer;
+}
+
+#afed-imagedisp-v .content-pane {
+  
+}
+
+#afed-footer {
+  position   : absolute;
+  top        : 880px;
+  left       : 10px;
+  width      : 1230px;
+  text-align : center;
+}
+
+      
+/* ***************************** *
+ * LEFT HAND MENU                *
+ * ***************************** */
+#afed-leftcontent {
+  background-color : #B7BED7;
+  border           : 1px solid #666;
+  
+  position : absolute;
+  top      : 230px;
+  left     : 10px;
+  
+  width    : 340px;
+  height   : 645px;
+}      
+
+/** Tab to select different content for the main display area. */
+#afed-leftcontent .tab {
+  /* font */
+  color       : #666;
+  font-family : Verdana, sans-serif;
+  font-weight : bold;
+  font-size   : 12px;
+  text-align  : center;
+  opacity     : 1;
+  
+  /* color */
+  background-color : #C3CAE0;
+  border           : 1px solid #666;
+  
+  /* position */
+  float     : left;
+  position  : relative;
+  top       : -19px;
+  z-index   : 1;
+
+  /* dimensions */
+  margin      : 0px;
+  margin-left : 5px;
+  padding     : 3px;
+  padding-top : 2px;
+  min-width   : 60px;
+  height      : 12px;
+  
+  cursor      : pointer;
+}
+
+/** The selected tab (i.e. currently visible content) */
+#afed-leftcontent .selected-tab {
+  color            : #000;
+  font-weight      : bold;
+  background-color : #EBDCB0;
+  border-bottom    : 1px solid #EBDCB0; /* erase the bottom border. */
+  cursor           : arrow;
+}
+
+/** Toolbar region of the main display area. */
+#afed-leftcontent .toolbar {
+  text-align       : left;
+  background-color : #EBDCB0;
+  border-bottom    : 1px solid #666; 
+  position         : absolute;
+  top              : 0px;
+  left             : 0px;
+  
+  width            : 335px;
+  height           : 22px;
+  padding-left     : 5px;
+  padding-top      : 3px;
+  margin-bottom    : 10px;
+}
+
+/** Toolbar region of the main display area. */
+#afed-leftcontent .tab-content {
+  font-family : Verdana, sans-serif;
+  font-weight : normal;
+  font-size   : 12px;
+  
+  text-align:left;
+  
+  width            : 330px;
+  height           : 617px;
+  padding-left     : 5px;
+  padding-right    : 5px;
+  padding-top      : 3px;
+  margin-top       : 25px;
+  overflow-y       : auto;
+  overflow-x       : hidden;
+}
+
+#facs-details .field { margin-bottom: 5px; }
+#facs-details .label { font-family : Verdana, sans-serif; font-size:13px; font-weight : bold; }
+#facs-details .value { 
+  font-family  : Verdana, sans-serif;
+  cursor       : pointer; 
+  padding-left : 5px; 
+  padding-top  : 1px;
+  min-height   : 18px;
+  font-wieght  : normal; 
+  border       : 1px solid #B7BED7;
+}
+
+#facs-details textarea {
+  border           : 1px solid black;
+  background-color : #A0ADD6;
+  
+  font-family      : Verdana, sans-serif;
+  font-weight      : normal;
+  font-size        : 12px;
+  
+  width            : 320px;
+  margin-left      : -5px;
+  margin-top       : -3px;
+  padding-left     : 3px;
+  padding-top      : 2px;
+}
+
+
+/* ***************************** *
+ * IMAGE STREAM                  *
+ * ***************************** */
+ 
+ /* Style for the image scrollpane. */
+.csdl-imgsp {
+    background-color : #B7BED7;
+    border-top       : 1px solid #000;
+    border-bottom    : 1px solid #000;
+        
+    width    : 100%;
+    height   : 166px;
+    position : absolute;
+    top      : 30px;
+    left     : 0px;
+    overflow : hidden;
+}
+
+/* The image container (image pane) in the image scrollpane. */
+.csdl-imgsp .ipane {
+    background-color : #B7BED7;
+        
+    position         : absolute;
+    margin-top       : 1px;
+    height           : 150px;
+    width            : 14000px;
+    z-index          : 1; 
+}
+    
+/* Defines style of the scrollbar div. */
+.csdl-imgsp .sb { }
+
+/* Style for the div that contains an image. */
+.csdl-imgsp .ipane .image {
+    position         : absolute;
+    margin-left      : 3px;
+    margin-right     : 3px;
+    padding          : 1px;
+    height           : 140px;
+    width            : 140px;
+    border           : 1px solid transparent;
+    
+    text-align       : center;
+    
+    /* specifies the line height for each image box, the vertical-align 
+       property of the child images (middle) will be relative to this "line" */
+    line-height:140px;
+}
+
+.csdl-imgsp .ipane .selected {
+    border           : 1px solid #333;
+    background-color : #EBDCB0;
+}
+
+.csdl-imgsp .ipane .loading {
+    background: url(assets/wait.gif) no-repeat center;
+}
+
+/* Style for the individual images in the pane. */
+.csdl-imgsp .ipane img { vertical-align:middle; }
+
+/* ***************************** *
+ * IMAGE STREAM SELECTORS        *
+ * ***************************** */
+ 
+#is-selectors {
+  position:relative;
+  top:30px;
+  float:right;
+  
+  z-index:2;
+  padding-right:10px;
+} 
+
+#is-selectors .selector {
+  float:left;
+  margin-left:15px; 
+}
+
+#is-selectors .selector .label {
+  color:#333;
+  font-family:Verdana, sans-serif;
+  font-weight:bold;
+  font-size:11px;
+  padding-bottom:1px;
+}
+
+#is-selectors .selector select {
+  font-family:Verdana, sans-serif;
+  font-weight:normal;
+  font-size:11px;
+}
+
+
+/* *************************** *
+ * LOAD FACSIMILE DIALOG       *
+ * *************************** */
+
+/* The header bar for the dialog. */
+#afed-load-dh {
+    background       : url(assets/load-hdbg.gif) repeat-x;
+    font-size        : 93%;  /* 12px */
+    line-height      : 24px;  
+    background-color : #EBDCB0;
+}
+
+/* The close button. */
+.yui-skin-sam .container-close {
+    background : url(assets/close.gif) no-repeat;
+    top        : 2px;
+    right      : 2px;
+    width      : 20px; 
+    height     : 20px;
+}
+
+#afed-load-d      {  background-color:#EBDCB0; }
+#afed-load-d form { padding:0px; margin:0px; }
+#afed-load-d .facs-frame { width:600px; height:420px; }
+
+#afed-load-d .facs-list,
+#afed-load-d .facs-info {
+    margin-top  : 3px;
+    padding-top : 8px;
+    border      : 1px solid #666;
+    width       : 290px;
+    height      : 380px;
+}
+
+#afed-load-d .facs-list { float:left; }
+#afed-load-d .facs-info { float:right; }
+
+#afed-load-d .facs-list .label,
+#afed-load-d .facs-info .label {
+    float            : left;
+    margin-top       : -20px;
+    margin-left      : 5px;
+    padding          : 0px;
+    padding-left     : 3px;
+    padding-right    : 3px;
+    background-color : #EBDCB0;
+    font-weight      : bold
+}
+
+#afed-load-d .facs-list .contents {
+    overflow-y   : auto;
+    overflow-x   : auto;
+    height       : 380px;
+    margin-top   : -8px;
+    padding-top  : 8px;
+    padding-left : 0px;
+}
+
+#afed-load-d .buttongroup {
+    position   : absolute;
+    top        : 435px;
+    width      : 600px;
+    text-align : right;
+}
+ 
+#afed-load-d .facs-list .facs-link {
+    font-family:Verdana, sans-serif;
+    font-size:12px; 
+    padding-top:2px;
+    padding-bottom:1px;
+    padding-left:5px;
+    color:#264199;
+    border-top    : 1px solid #EBDCB0;
+    border-bottom : 1px solid #EBDCB0;
+}
+
+#afed-load-d .facs-list .facs-link-h {
+    background-color : #C3CAE0;
+    border-top       : 1px solid #264199;
+    border-bottom    : 1px solid #264199;
+}
+
+#afed-load-d .facs-list .facs-link-s {
+    background-color : #CCC;
+    border-top       : 1px solid #264199;
+    border-bottom    : 1px solid #264199;
+}
+
+
+#afed-load-d .facs-list .contents {
+    overflow-y   : auto;
+    overflow-x   : auto;
+    height       : 380px;
+    margin-top   : -8px;
+    padding-top  : 8px;
+    padding-left : 0px;
+}
+
+#afed-load-d .facs-info .field .label {
+    /* over write box label style */
+    float            : none;
+    margin           : 0px;
+    padding          : 0px;
+    background-color : #EBDCB0;
+    font-weight      : bold;
+    
+    color            : #333;
+    font-family      : Verdana, sans-serif;
+    font-size        : 12px;
+    font-weight      : bold;
+    width            : 125px;
+    padding-top      : 3px;
+    padding-bottom   : 1px;
+    padding-left     : 5px;
+}
+
+#afed-load-d .facs-info .field .value {
+    color            : #333;
+    font-family      : Verdana, sans-serif;
+    font-size        : 12px;
+    font-weight      : normal;
+    padding-top      : 1px;
+    padding-bottom   : 6px;
+    padding-left     : 15px;
+}
+
+/* ***************************** *
+ * DEFINED COLORS                *
+ * ***************************** */
+.maroon        { color:#8C3D33; }
+.light-blue    { color:#C3CAE0; }
+.dark-blue     { color:#647DC9; }
+.tan           { color:#EBDCB0; }
+
+.maroon-bg     { background-color:#8C3D33; }
+.light-blue-bg { background-color:#C3CAE0; }
+.dark-blue-bg  { background-color:#647DC9; }
+.tan-bg        { background-color:#EBDCB0; }

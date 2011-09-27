@@ -29,6 +29,7 @@ public class VPropServlet extends HttpServlet {
     public static final int CONFLICT       = HttpServletResponse.SC_CONFLICT;
     
     public static final int CREATED        = HttpServletResponse.SC_CREATED;
+    public static final int OK             = HttpServletResponse.SC_OK;
 
     protected static PropertyRepository s_repo;
     
@@ -42,7 +43,6 @@ public class VPropServlet extends HttpServlet {
 
         try {
             s_repo = PropertyRepository.get();
-            s_repo.createIfNeeded();
         } catch (RepositoryAccessException rae) {
             String errmsg = "Could not load PropertyRepository.";
             throw new ServletException(errmsg, rae);

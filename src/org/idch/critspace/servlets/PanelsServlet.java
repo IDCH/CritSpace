@@ -115,6 +115,9 @@ public class PanelsServlet extends CritspaceServlet {
         return props;
     }
     
+    /**
+     * Get a panel or list all panels for a specific workspace.
+     */
     public void doGet(HttpServletRequest req, HttpServletResponse resp) 
         throws IOException {
         String errmsg = "Could retrieve the panel: ";
@@ -149,26 +152,52 @@ public class PanelsServlet extends CritspaceServlet {
             resp.sendError(INTERNAL_ERROR, error(errmsg, rae));
         }
     }
+    
+    public void doDelete(HttpServletRequest req, HttpServletResponse resp) 
+        throws IOException {
+        
+        long panelId = getId(req.getParameter(PARAM_ID), resp);
+        if (resp.isCommitted())
+            return;
 
+        try {
+            s_repo.deletePanel(panelId);
+            resp.setStatus(OK);
+        } catch (RepositoryAccessException rae) {
+            String errmsg = "Could not delete panel (id = " + panelId + "). " +
+            		"Error trying to save data.";
+            resp.sendError(INTERNAL_ERROR, error(errmsg, rae));
+        }
+    }
+
+    /**
+     * Handles PUT requests to set named properties for a panel.
+     */
     public void doPut(HttpServletRequest req, HttpServletResponse resp) 
             throws IOException {
         String errmsg = "Could set properties: ";
         
+        long panelId = getId(req.getParameter(PARAM_ID), resp);
+        if (resp.isCommitted())
+            return;
+        
         try {
-            long panelId = getId(req.getParameter(PARAM_ID), resp);
-            if (resp.isCommitted())
-                return;
             if (req.getParameter(PARAM_PROPS) == null) {
                 String prop  = req.getParameter(PARAM_PROP_NAME);
                 String value = req.getParameter(PARAM_PROP_VALUE);
                 
-                if ((prop == null) || (value == null)) {
-                    errmsg += "property name and value must be supplied.";
+                if ((prop == null)) {
+                    errmsg += "property name must be supplied.";
                     resp.sendError(BAD_REQ, warn(errmsg, null));
                     return;
                 }
 
-                s_repo.setProperty(panelId, prop, value);
+                if (value == null) {
+                    s_repo.deleteProperty(panelId, prop);
+                } else { 
+                    s_repo.setProperty(panelId, prop, value);
+                }
+                
                 resp.setStatus(CREATED);
             } else {
                 JSONParser parser = new JSONParser();
@@ -200,10 +229,6 @@ public class PanelsServlet extends CritspaceServlet {
      *   <li><em>vprops</em> The JSON object literal representing the 
      *          new visual propries group associated with this panel</li>
      *   <li><em>props</em> A JSON object literal</li>
-     * 
-     * 
-     * 
-     * 
      */
     public void doPost(HttpServletRequest req, HttpServletResponse resp) 
             throws IOException {

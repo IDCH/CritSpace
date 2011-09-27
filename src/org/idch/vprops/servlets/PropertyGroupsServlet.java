@@ -56,6 +56,7 @@ public class PropertyGroupsServlet extends VPropServlet {
         
         return group;
     }
+    
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws IOException {
         String id = req.getParameter(GROUP_ID_PARAM);
