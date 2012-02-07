@@ -62,7 +62,6 @@ public class MySQLCritspaceRepository extends CritspaceRepository {
     
     public Map<String, Object> createWorkspace(User user, String name)
             throws RepositoryAccessException {
-        
         Map<String, Object> data = null;
         Connection conn = null;
         try {
