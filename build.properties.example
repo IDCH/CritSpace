@@ -1,0 +1,80 @@
+compile.build.debug = yes
+compile.build.optimize = no
+compile.build.deprecation = yes
+
+# Uncomment to generate warnings for deprecated files.
+#compile.warn.deprecation = yes
+
+ant.build.javac.source=1.6
+ant.build.javac.target=1.6
+
+# Whether the Unit Test should be run in their own JVM.
+junit.fork=true
+
+# Controls how the JVM is forked. Valid options are 'perTest', 'perBatch', and 'once'
+junit.forkmode=once
+
+
+# ========================================================================================
+# Application directory structure. These properties define the where the build manager 
+# will find source files and put generated data. In general, the default options are 
+# are adequate, but these can be configured if needed.
+#
+# TODO add some better documentation here
+# ========================================================================================
+
+basedir = .
+src.dir = ${basedir}/src
+web.dir = ${basedir}/WebContent
+# classfile.dir = ${build.dir}/classes
+classfile.dir = ${web.dir}/WEB-INF/classes
+lib.dir = ${web.dir}/WEB-INF/lib
+# lib.dir = ${basedir}/lib
+build.dir = ${basedir}/build
+javadoc.dir = ${basedir}/doc
+dist.dir = ${basedir}/dist
+meta.dir = ${web.dir}/META-INF
+buildtools.dir = ../build-tools
+
+# ========================================================================================
+# Web application properties. Uncomment and edit these to add support for building a 
+# web application.
+#
+# app.name             Base name of this application, used to construct filenames and 
+#                      directories. Defaults to "myapp".
+#
+# app.path             Context path to which this application should be deployed (defaults to 
+#                      "/" plus the value of the "app.name" property).
+#
+# app.version          Version number of this iteration of the application.
+#
+# catalina.home        The directory in which you have installed a binary distribution of 
+#                      Tomcat 5.  This will be used by the "deploy" target.
+#
+# manager.url          The URL of the "/manager" web application on the Tomcat installation 
+#                      to which we will deploy web applications and web services.
+#
+# manager.username     The login username of a user that is assigned the "manager" role (so 
+#                      that he or she can execute commands via the "/manager" web application)
+#
+# manager.password     The login password of a user that is assigned the "manager" role (so 
+#                      that he or she can execute commands via the "/manager" web application)
+# ========================================================================================
+
+#app.name = myapp
+#app.path = /myapp		
+#app.version=0.1-dev
+#catalina.home = ../../../.. 
+#manager.url = http://localhost:8080/manager 
+#manager.username = admin
+#manager.password= admin 
+
+# ========================================================================================
+# Database configuration parameters, for use with dbutils.xml
+# ========================================================================================
+
+# HSQLDB configuration information
+hsqldb.datafile=./data/db/nttext
+hsqldb.servername=nttext
+hsqldb.username=sa
+hsqldb.password=
