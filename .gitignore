@@ -1,0 +1,4 @@
+build/
+build.properties
+lib
+WebContent/WEB-INF/classes/
