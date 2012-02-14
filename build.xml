@@ -15,6 +15,27 @@
     <pathelement location="${src.test.dir}"/>
   </path>
 
+  <property name="etc.dir" value="${basedir}/etc/"/>
+  <patternset id="meta.files">
+      <include name="**/*.xml"/>
+      <include name="**/*.properties"/>
+  </patternset>
+
+  <target name="copy-metafiles">
+    <copy todir="${classfile.dir}">
+      <fileset dir="${src.dir}">
+        <patternset refid="meta.files"/>
+      </fileset>
+    </copy>
+    <copy todir="${classfile.dir}">
+      <fileset dir="${etc.dir}">
+        <patternset refid="meta.files"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile" depends="basic.compile, copy-metafiles" />
+
   <target name="dbtest" depends="compile">
     <java classname="org.idch.critspace.DBTest" fork="true">
       <classpath refid="test.compile.path"/>
