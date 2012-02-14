@@ -24,6 +24,7 @@
     <dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1"/>
     <dependency org="org.idch" name="IDCHCore" rev="latest.integration"/>
     <dependency org="junit" name="junit" rev="4.5"/>
+    <dependency org="mysql" name="mysql-connector-java" rev="5.1.18"/>
     <dependency org="org.apache.tomcat" name="servlet-api" rev="6.0.29"/>
   </dependencies>
 </ivy-module>
