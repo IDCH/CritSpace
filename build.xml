@@ -14,5 +14,11 @@
     <pathelement location="src"/>
     <pathelement location="${src.test.dir}"/>
   </path>
+
+  <target name="dbtest" depends="compile">
+    <java classname="org.idch.critspace.DBTest" fork="true">
+      <classpath refid="test.compile.path"/>
+    </java>
+  </target>
  
 </project>
